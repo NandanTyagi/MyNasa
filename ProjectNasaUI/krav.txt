@@ -1,0 +1,52 @@
+Kravspecifikation NasaProj
+
+    Landningssidan
+
+        När sidan öppnas SKA en välkomstsida visas
+
+        På välkomstsidan SKA det finnas en kort presentation om vad man kan göra på sidan.
+
+        På välkomstsidan BÖR det finnas kuriosa/fakta om mars för att locka till nyfikenhet  
+
+    List sidan
+
+        Det SKA finnas en sida för att lista alla forskningsfordon på Mars.
+
+    Detaljsidan
+
+        Det SKA finnas en sida för att lista information och bilder från varje enskilt forskningsfordon på Mars.
+
+        Som besökare på sidan SKA man kunna se bilder från Mars.
+
+    Meny
+
+		Det SKA finnas en meny med navigering till dom andra sidor i applikationen.
+
+    Övrigt
+
+        Designtemat för hela applikationen SKA vara Mars.
+
+        Det BÖR finnas en medlemssida.
+
+        På medlemsidan BÖR man kunna göra en intresseanmälan för att få mer information.
+
+        Det BÖR finnas en sida med rekommendrade artiklar.
+
+        På artikel sidan BÖR man kunna läsa artiklar om Mars.
+
+    Åtkomstpunkter
+        För att veta vilka dagar det tagits bilder från drönare:
+        https://api.nasa.gov/mars-photos/api/v1/manifests/${roverName}
+        
+        För att hämta bilder som visas på sidan:
+		https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?
+
+        Förslag på vår egen åtkomstpunkt:
+        localhost://photos/niu/1
+        
+
+
+
+
+        
+

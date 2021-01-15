@@ -1,0 +1,34 @@
+Frågor
+    
+		Hur började ni vid utformandet av kravspecen? 
+        Utgick ni direkt från scenariot från kundens "ögon" eller började ni med mockupen
+        och utgick från den för att formulera kraven? Eller hoppade ni mellan allt eftersom arbetet fortgick?
+        
+        Vilka planeringsverktyg använde ni er av under ert förarbete? Och hur tyckte ni det fungerade?
+        
+        Involverades kunden vid otydligheter/funderingar och hur kommunicerade ni detta?
+
+        Vid funderingar med kund, gav ni förslag på lösningar eller försökte ni styra kund åt ett visst håll?
+
+        Hur har ni samarbetat under projektet? Via zoom? Live share, github eller något annat verktyg?
+
+        Klargjorde ni med kunden i detalj för designen hur den var tänkt att se ut? Allt från typsnitt till färger och bilder?
+
+        
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+
+
+
