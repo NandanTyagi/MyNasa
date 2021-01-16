@@ -21,15 +21,18 @@ h3 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: unset;
+  min-height: 100vh;
   height: fit-content;
   color: rgb(229, 226, 226);
 }
 .overlay {
   background-image: linear-gradient(black, transparent);
+  min-height: 100vh;
   height: fit-content;
 }
 .overlay-reverse {
   background-image: linear-gradient(transparent, black);
+  min-height: 100vh;
   height: fit-content;
 }
 .container-header-clearfix {
@@ -150,6 +153,7 @@ container-main {
   list-style-type: none;
   padding: 1em;
   z-index: 6;
+  font-weight: bold;
 }
 
 .slide-menu a {
@@ -163,11 +167,141 @@ container-main {
   height: 200px;
   width: 100%;
 }
+.rover-shade1::after {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  content: 'Curiosity';
+  color: white;
+  text-align: center;
+  text-justify: center;
+  font-size: xx-large;
+  background-color: transparent;
+  opacity: 1;
+  position: absolute;
+  top: 81px;
+  right: 0%;
+  height: 218.75px;
+  width: 100%;
+  padding-top: 0;
+  /* visibility: hidden; */
+}
+.rover-shade2::after {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    content: '';
+    color: white;
+    text-align: center;
+    text-justify: center;
+    font-size: xx-large;
+    background-color: black;
+    opacity: 0.5;
+    position: absolute;
+    top: 81px;
+    right: 0%;
+    height: 218.75px;
+    width: 100%;
+    padding-top: 0;
+    /* visibility: hidden; */
+}
+.rover-shade3::after {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  content: 'Spirit';
+  color: white;
+  text-align: center;
+  text-justify: center;
+  font-size: xx-large;
+  background-color: transparent;
+  opacity: 1;
+  position: absolute;
+  top: 304px;
+  right: 0%;
+  height: 218.75px;
+  width: 100%;
+  padding-top: 0;
+  /* visibility: hidden; */
+}
+.rover-shade4::after {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    content: '';
+  color: white;
+  text-align: center;
+  text-justify: center;
+  font-size: xx-large;
+  background-color: black;
+  opacity: 0.5;
+  position: absolute;
+  top: 304px;
+  right: 0%;
+  height: 218.75px;
+  width: 100%;
+  padding-top: 0;
+  /* visibility: hidden; */
+}
+.rover-shade5::after {
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  content: 'Opportunity';
+  color: white;
+  text-align: center;
+  text-justify: center;
+  font-size: xx-large;
+  background-color: transparent;
+  opacity: 1;
+  position: absolute;
+  top: 524px;
+  right: 0%;
+  height: 218.75px;
+  width: 100%;
+  padding-top: 0;
+  /* visibility: hidden; */
+}
+.rover-shade6::after {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    content: '';
+  color: white;
+  text-align: center;
+  text-justify: center;
+  font-size: xx-large;
+  background-color: black;
+  opacity: 0.5;
+  position: absolute;
+  top: 525px;
+  right: 0%;
+  height: 218.75px;
+  width: 100%;
+  padding-top: 0;
+  /* visibility: hidden; */
+}
+
 #rover-image {
   padding: 0;
 }
+.rover-single {
+  width: 100%;
+}
 .spinner {
   height: 89px;
+}
+.spinner-center {
+  position: absolute;
+  top: 40%;
+  right: 40%;
+  height: 80px;
 }
 /* Form */
 form {
@@ -206,6 +340,9 @@ input {
   cursor: pointer;
   width: 100%;
 }
+.clickable {
+    cursor: pointer;
+}
 
 @media screen and (min-width: 900px) {
   .box {
@@ -230,6 +367,6 @@ input {
     border-radius: 5px;
   }
   #rover-image {
-      width: fit-content;
+    width: fit-content;
   }
 }
