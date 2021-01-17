@@ -47,31 +47,43 @@
   // First page
   function firstPage() {
     mainContainer.innerHTML = '';
-    mainContainer.innerHTML = `<div class="box" id="sho">
-              <h1>
-                Naturhistoriska Intressegruppen <br />
-                i Uddebo
-              </h1>
-            </div>
-            <div class="box">
-              <h3>På den här sidan kan du:</h3>
-              <br />
-              <ul class="list-items">
-                <li>Läsa artiklar om Mars</li>
-                <li>Se bilder på Mars</li>
-                <li>Läsa om forskningsfordon som finns på Mars</li>
-                <li>Bli medlem hos NIU.se</li>
-              </ul>
-            </div>
-            <div class="box">
-              <h3>Rekomendationer</h3>
-            </div>
-            <div class="box">
-              <h3>Intressant fakta</h3>
-            </div>
-            <div class="box clickable" id="rovers-btn">
-              <h3>Forskningsfordon på Mars</h3>
-             </div>`;
+    mainContainer.innerHTML = ` <div class="grid-container-5">
+              <div class="grid-item">
+                <div class="box" id="sho">
+                  <h1>
+                    Naturhistoriska Intressegruppen <br />
+                    i Uddebo
+                  </h1>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="box">
+                  <h3>På den här sidan kan du:</h3>
+                  <br />
+                  <ul class="list-items">
+                    <li>Läsa artiklar om Mars</li>
+                    <li>Se bilder på Mars</li>
+                    <li>Läsa om forskningsfordon som finns på Mars</li>
+                    <li>Bli medlem hos NUI.se</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="box">
+                  <h3>Rekomendationer</h3>
+                </div>
+              </div>
+              <div class="grid-item">
+                <div class="box">
+                  <h3>Intressant fakta</h3>
+                </div>
+              </div>
+              <div class="grid-item" id="rovers-btn">
+                <div class="box">
+                  <h3>Forskningsfordon på Mars</h3>
+                </div>
+              </div>
+            </div>`;
     var roversBtn = document.getElementById('rovers-btn');
     roversBtn.addEventListener('click', () => {
       console.log('click');
@@ -81,41 +93,43 @@
   }
   // Show first page
   firstPage();
-  
+
   // Rovers menubtn clicked
   function pickRoverView() {
     colorMenuBtn('Rovers');
     mainContainer.innerHTML = `
-              <div class="rover-shade1" id="Curiosity">
-                <div class="rover-shade2">
-                  <img
-                    src="./img/Curiosity.jpg"
-                    alt=""
-                    class="rover-single"
-                    id="rover-1"
-                  />
-                </div>
+    <div class="grid-container-3">
+              <div class="grid-item">
+                <div class="rover-shade"></div>
+                <div class="rover-shade-text" id="Curiosity">Curiosity</div>
+                <img
+                src="./img/Curiosity.jpg"
+                alt=""
+                class="rover-single"
+                id="rover-1"
+                />
               </div>
-              <div class="rover-shade3" id="Spirit">
-                <div class="rover-shade4">
-                  <img
-                    src="./img/Spirit.jpg"
-                    alt=""
-                    class="rover-single"
-                    id="rover-2"
-                  />
-                </div>
+              <div class="grid-item">
+                <div class="rover-shade"></div>
+                <div class="rover-shade-text" id="Spirit">Spirit</div>
+                <img
+                src="./img/Spirit.jpg"
+                alt=""
+                class="rover-single"
+                id="rover-2"
+                />
               </div>
-              <div class="rover-shade5" id="Opportunity">
-                <div class="rover-shade6">
-                  <img
-                    src="./img/Opportunity.jpg"
-                    alt=""
-                    class="rover-single"
-                    id="rover-3"
-                  />
-                </div>
+              <div class="grid-item">
+                <div class="rover-shade"> </div>
+                <div class="rover-shade-text" id="Opportunity">Opportunity</div>
+                <img
+                  src="./img/Opportunity.jpg"
+                  alt=""
+                  class="rover-single"
+                  id="rover-3"
+                />
               </div>
+            </div>
             `;
     var curiosityLink = document.getElementById('Curiosity');
     curiosityLink.addEventListener('click', () => {
@@ -221,51 +235,60 @@
 
     function showDetailsView(currentRoverManifest) {
       mainContainer.innerHTML = '';
-      mainContainer.innerHTML = `<div class="box" id="sho">
-              <h2 id="rover-name"></h2>
-              <h3 id="landing-date">
-                <img src="./img/spinner.gif" class="spinner" alt="" />
-              </h3>
-              <h3 id="launch-date"></h3>
-              <h4 id="rover-status"></h4>
-            </div>
-            <div class="box" id="rover-image">
-              <img
-                src="./img/spinner.gif"
-                class="rover-img"
-                alt=""
-                style="width: 50%; height: 50%;"
-              />
-            </div>
-            <div class="box">
-              <h3>Sök foton:</h3>
-              <br />
-              <div class="flex-row">
-                <input type="date" name="earth-date" id="earth-date" />
+      mainContainer.innerHTML = `            <div class="grid-container-3">
+              <div class="grid-item">
+                <div class="box" id="sho">
+                <div class="back-btn clickable" id="back-btn"><i class="fas fa-chevron-left"></i></div>
+                <h2 id="rover-name"></h2>
+                <h3 id="landing-date">
+                  <img src="./img/spinner.gif" class="spinner" alt="" />
+                </h3>
+                <h3 id="launch-date"></h3>
+                <h4 id="rover-status"></h4>
               </div>
-              <br />
-              <div class="flex-row">
-                <label for="camera-FHAZ">FHAZ</label>
-                <input
-                  type="checkbox"
-                  name="camera-FHAZ"
-                  id="camera-FHAZ"
-                  title="Front Hazard Avoidance Camera"
+              </div>
+              <div class="grid-item">
+                 <div class="box" id="rover-image">
+                <img
+                  src="./img/spinner.gif"
+                  class="rover-img"
+                  alt=""
+                  style="width: 50%; height: 50%"
                 />
               </div>
-              <br />
-              <div class="flex-row">
-                <label for="camera-PANCAM">PANCAM</label>
-                <input
-                  type="checkbox"
-                  name="camera-PANCAM"
-                  id="camera-PANCAM"
-                  title="Panoramic Camera"
-                />
               </div>
-              <br />
-              <div class="flex-row">
-                <button id="submit-btn" class="submit-btn">Show</button>
+              <div class="grid-item">
+                <div class="box">
+                <h3>Se mars foton från ${currentRover}</h3>
+                <br />
+                <div class="flex-row">
+                  <input type="date" name="earth-date" id="earth-date" />
+                </div>
+                <br />
+               <!-- <div class="flex-row">
+                  <label for="camera-FHAZ">FHAZ</label>
+                  <input
+                    type="checkbox"
+                    name="camera-FHAZ"
+                    id="camera-FHAZ"
+                    title="Front Hazard Avoidance Camera"
+                  />
+                </div>
+                <br />
+                <div class="flex-row">
+                  <label for="camera-PANCAM">PANCAM</label>
+                  <input
+                    type="checkbox"
+                    name="camera-PANCAM"
+                    id="camera-PANCAM"
+                    title="Panoramic Camera"
+                  />
+                </div>
+                <br /> -->
+                <div class="flex-row">
+                  <button id="submit-btn" class="submit-btn">Visa foton </button>
+                </div>
+              </div>
               </div>
             </div>`;
       var roverNameTitle = document.getElementById('rover-name');
@@ -274,6 +297,10 @@
       var roverLaunch = document.getElementById('launch-date');
       var roverImage = document.getElementById('rover-image');
       var earthDate = document.getElementById('earth-date');
+      var backBtn = document.getElementById('back-btn');
+      backBtn.addEventListener('click', () => {
+        pickRoverView();
+      });
       console.log('Current Rover Manifest', currentRoverManifest);
       earthDate.setAttribute(
         'max',
@@ -310,11 +337,16 @@
         .then((roverByEarthDate) => {
           let printPic = '';
           roverByEarthDate.photos.forEach((el) => {
-            console.log(el.rover);
+            console.log(el);
             printPic += `<img src="${el.img_src}" alt="" class="pic">`;
-            show.innerHTML = printPic;
+            // show.innerHTML = printPic;
           });
         });
+      var submitBtn = document.getElementById('submit-btn');
+      submitBtn.addEventListener('click', () => {
+        console.log('clicked');
+        showPhotos(earthDate.value, currentRover);
+      });
     }
   }
 
@@ -391,5 +423,39 @@
       menuRecommend.style.color = originalColor;
       menuMember.style.color = 'red';
     }
+  }
+
+  function showPhotos(chosenDate, currentRover) {
+    mainContainer.innerHTML = '';
+    mainContainer.innerHTML =
+      '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
+    fetch(
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${currentRover}/photos?earth_date=${chosenDate}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
+    )
+      .then((res) => res.json())
+      .then((roverByEarthDate) => {
+        let printPic = '';
+        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
+
+        mainContainer.innerHTML = titleDiv;
+
+        if (roverByEarthDate.photos.length !== 0) {
+          roverByEarthDate.photos.forEach((el) => {
+            if (el.camera.name != 'CHEMCAM' && el.camera.name !== '') {
+              console.log(el.camera.name);
+              printPic += `<img src="${el.img_src}" alt="" class="pic"><hr/>`;
+            }
+          });
+        } else {
+          titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3><br/><h4>No photos captured this date</h4></div></div>`;
+        }
+        mainContainer.innerHTML = titleDiv + printPic;
+        let backBtn = document.getElementById('back-btn');
+        backBtn.addEventListener('click', () => {
+          mainContainer.innerHTML =
+            '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
+          detailsView(currentRover);
+        });
+      });
   }
 } // Incapsulation end
