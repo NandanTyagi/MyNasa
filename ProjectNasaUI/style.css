@@ -15,6 +15,10 @@ h1,
 h3 {
   font-weight: 100;
 }
+hr {
+  width: 100%;
+  color: transparent;
+}
 
 .container-all {
   background-image: url('https://cdn.spacetelescope.org/archives/images/wallpaper1/opo0124a.jpg');
@@ -55,6 +59,7 @@ h3 {
 .logo {
   font-size: 2em;
   font-weight: 700;
+  cursor: pointer;
 }
 .menu-btn i {
   font-size: 2em;
@@ -81,13 +86,13 @@ container-main {
 .grid-container-3 {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat (3, 1fr);
+  grid-template-rows: repeat (3, 100px);
   height: 82vh;
   justify-content: center;
   align-items: center;
   gap: 5px;
 }
-.grid-item {
+.grid-item,.grid-5-item {
   position: relative;
   height: 100%;
   box-shadow: 2px 2px 2px 2px black;
@@ -133,8 +138,8 @@ container-main {
   z-index: 10;
 }
 .box {
-  /* margin: 1em;
-  padding: 1.5em; */
+  margin: 0;
+  padding: 1.5em;
   border: 1px solid rgb(82, 81, 81);
   text-align: center;
   height: 100%;
@@ -160,9 +165,49 @@ container-main {
 .box:last-of-type {
   margin-bottom: 0;
 }
+.boxer {
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    border: none;
+    height: 100%;
+    text-align: center;
+  }
+  .flexer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  #flexer {
+    display: flex;
+    flex-direction: column;
+  }
+.boxer h3 {
+  text-align: center;
+}
+.boxer ul {
+  justify-self: center;
+}
+.boxer li {
+  list-style-type: disc;
+  text-align: start;
+  margin-left: 4em;
+  margin-right: 2em;
+}
+.boxer:last-of-type {
+  margin-bottom: 0;
+}
 
 .pic {
-  width: 100vw;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0.5em;
 }
 
 .container-footer {
@@ -226,6 +271,7 @@ container-main {
 }
 .list-items li {
   list-style: none;
+  text-align: center;
 }
 .rover-img {
   height: 100%;
@@ -294,28 +340,41 @@ input {
 }
 .back-btn {
   position: absolute;
-  top: 10px;
-  left: 30px;
+  top: 20px;
+  left: 15px;
+  font-size: medium;
 }
 .title {
   text-align: center;
   position: relative;
+  font-size: x-small;
 }
 .fixed {
   position: fixed;
   width: 100%;
   background-color: black;
-  top: 0px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 100;
   width: 50%;
   padding: 5px;
 }
-@media screen and (min-width: 800px) {
+.text-center {
+  text-align: center;
+  font-size: x-large;
+}
+
+.text-center > a {
+  color: white;
+  cursor: pointer;
+}
+@media screen and (min-width: 1000px) {
   body {
     overflow: hidden;
   }
   .box {
-    width: 50vw;
+    width: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -323,6 +382,33 @@ input {
     justify-self: center;
     align-self: center;
     border: none;
+  }
+  .boxer {
+    width: 25vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    border: none;
+    height: 100%;
+    text-align: center;
+  }
+  .flexer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  #flexer {
+    display: flex;
+    flex-direction: column;
+  }
+  .list-items {
+    padding: 0 1em;
+    line-height: 1.3;
   }
   .box ul li {
     align-self: center;
@@ -334,6 +420,7 @@ input {
     width: 20%;
     opacity: 0.4;
   }
+
   .rover-img {
     height: 300px;
     width: 100%;
@@ -343,40 +430,68 @@ input {
     width: 100%;
   }
   .rover-single {
-    width: 400px;
+    width: 100%;
   }
-  .container-main{
+  .container-main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100vh;
     overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .container-main::-webkit-scrollbar {
+    display: none;
   }
   .grid-container-3 {
-    display: flex;
-    height: 30%;
+    display: grid;
+    height: 50vh;
     gap: 1em;
     width: fit-content;
-    grid-template-columns: repeat(3,400px);
-    grid-template-rows: 50%;
+    grid-template-columns: repeat(1, 400px);
+    grid-template-rows: 40%;
     justify-self: center;
     align-self: center;
     justify-content: center;
     align-items: center;
-    margin-bottom: 200px;
+    margin-bottom: 10px;
+    margin-top: 50px;
   }
   .grid-container-5 {
-    margin: 1em 0 9em 0;
+    margin-top: 1em;
     height: 70%;
     gap: 1em;
     width: fit-content;
-    
   }
   .grid-item {
     width: 100%;
     justify-self: center;
+    height: 180px;
   }
+  .grid-5-item {
+    width: fit-content;
+    justify-self: center;
+    height: 130px;
+    box-shadow: 2px 2px 2px 2px black;
+    font-size: small;
+  }
+  .rover-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+
+  opacity: 0.5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
   .rover-shade-text {
     position: absolute;
     top: 0;
@@ -402,5 +517,53 @@ input {
     justify-content: center;
     align-items: center;
     font-size: xx-large;
+  }
+
+}
+  @media screen and (max-height: 600px) {
+  .grid-container-3 {
+    display: grid;
+    height: 50vh;
+    gap: 1em;
+    width: fit-content;
+    grid-template-columns: repeat(1, 400px);
+    grid-template-rows: 40%;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 50px;
+  }
+  .grid-item {
+    width: fit-content;
+    justify-self: center;
+    height: 130px;
+  }
+  .box {
+    width: 25vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    border: none;
+    height: 100%;
+    
+  }
+   .grid-5-item {
+    width: fit-content;
+    justify-self: center;
+    height: 70px;
+    box-shadow: 2px 2px 2px 2px black;
+    font-size: x-small;
+  }
+   .grid-5-item:nth-of-type(2) {
+    width: fit-content;
+    justify-self: center;
+    height: 95px;
+    box-shadow: 2px 2px 2px 2px black;
+    font-size: x-small;
   }
 }

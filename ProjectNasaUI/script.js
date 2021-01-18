@@ -22,7 +22,7 @@
   var logoBtn = document.getElementById('logo');
 
   // App pages
-  var pages = ['Home', 'Rovers', 'Details', 'Recommendations', 'Members'];
+  var pages = ['Home', 'Rovers', 'Recommendations', 'Members'];
 
   // Set current rover
   var rovers = ['Opportunity', 'Spirit', 'Curiosity'];
@@ -48,38 +48,38 @@
   function firstPage() {
     mainContainer.innerHTML = '';
     mainContainer.innerHTML = ` <div class="grid-container-5">
-              <div class="grid-item">
-                <div class="box" id="sho">
+              <div class="grid-5-item">
+                <div class="boxer" id="sho">
                   <h1>
                     Naturhistoriska Intressegruppen <br />
                     i Uddebo
                   </h1>
                 </div>
               </div>
-              <div class="grid-item">
-                <div class="box">
+              <div class="grid-5-item">
+                <div class="boxer" id="flexer">
                   <h3>På den här sidan kan du:</h3>
                   <br />
-                  <ul class="list-items">
-                    <li>Läsa artiklar om Mars</li>
-                    <li>Se bilder på Mars</li>
-                    <li>Läsa om forskningsfordon som finns på Mars</li>
-                    <li>Bli medlem hos NUI.se</li>
-                  </ul>
+                  <div class="list-items">
+                    <p>Läsa artiklar om Mars</p>
+                    <p>Se bilder på Mars</p>
+                    <p>Läsa om forskningsfordon som finns på Mars</p>
+                    <p>Bli medlem hos NUI.se</p>
+                  </div>
                 </div>
               </div>
-              <div class="grid-item">
-                <div class="box">
+              <div class="grid-5-item">
+                <div class="boxer">
                   <h3>Rekomendationer</h3>
                 </div>
               </div>
-              <div class="grid-item">
-                <div class="box">
+              <div class="grid-5-item">
+                <div class="boxer">
                   <h3>Intressant fakta</h3>
                 </div>
               </div>
-              <div class="grid-item" id="rovers-btn">
-                <div class="box">
+              <div class="grid-5-item" id="rovers-btn">
+                <div class="boxer clickable">
                   <h3>Forskningsfordon på Mars</h3>
                 </div>
               </div>
@@ -92,6 +92,7 @@
     colorMenuBtn('Home');
   }
   // Show first page
+  logoBtn.addEventListener('click', firstPage);
   firstPage();
 
   // Rovers menubtn clicked
@@ -252,8 +253,7 @@
                 <img
                   src="./img/spinner.gif"
                   class="rover-img"
-                  alt=""
-                  style="width: 50%; height: 50%"
+                  
                 />
               </div>
               </div>
@@ -323,8 +323,7 @@
       roverImage.innerHTML = `<img
                 src="./img/${currentRover}.jpg"
                 class="rover-img"
-                alt=""
-                srcset=""
+              
               />`;
 
       if (chosenDate != currentRoverManifest.photo_manifest.max_date) {
@@ -435,7 +434,7 @@
       .then((res) => res.json())
       .then((roverByEarthDate) => {
         let printPic = '';
-        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
+        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
 
         mainContainer.innerHTML = titleDiv;
 
@@ -443,7 +442,7 @@
           roverByEarthDate.photos.forEach((el) => {
             if (el.camera.name != 'CHEMCAM' && el.camera.name !== '') {
               console.log(el.camera.name);
-              printPic += `<img src="${el.img_src}" alt="" class="pic"><hr/>`;
+              printPic += `<img src="${el.img_src}" alt="" class="pic">`;
             }
           });
         } else {
@@ -458,4 +457,26 @@
         });
       });
   }
+
+  function membersPage() {
+    colorMenuBtn('Members');
+    hideMenu();
+    mainContainer.innerHTML = '';
+    mainContainer.innerHTML = `<div class="grid-container-3">
+              <div class="grid-item">
+                <div class=" flexer text-center">Vill du ha mer info om Mars?</div>
+                
+              </div>
+              <div class="grid-item">
+                <div class="flexer text-center">Bli medlem
+                  !
+                </div>
+                
+              </div>
+              <div class="grid-item">
+                <div class="flexer text-center">Maila oss:&nbsp <a href="mailto:info@niu.se">info@niu.se</a></div>
+              </div>
+            </div>`;
+  }
+  menuMember.addEventListener('click', membersPage);
 } // Incapsulation end
