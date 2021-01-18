@@ -3,34 +3,26 @@
   // Incapsulation start
 
   /************* DOM Strings ***************/
-  var menuBtn = document.getElementById('menu-btn');
-  var slideMenu = document.getElementById('slide-menu');
-  var slideMenuShade = document.getElementById('slide-menu-shade');
-  var menuRovers = document.getElementById('menu-fordon');
-  var menuHome = document.getElementById('menu-home');
-  var menuMember = document.getElementById('menu-member');
-  var menuRecommend = document.getElementById('menu-recommendation');
-  var show = document.getElementById('show');
-  var roverNameTitle = document.getElementById('rover-name');
-  var roverStatus = document.getElementById('rover-status');
-  var roverLanding = document.getElementById('landing-date');
-  var roverLaunch = document.getElementById('launch-date');
-  var roverImage = document.getElementById('rover-image');
-  var earthDate = document.getElementById('earth-date');
-  var submitBtn = document.getElementById('submit-btn');
-  var mainContainer = document.getElementById('container-main');
-  var logoBtn = document.getElementById('logo');
-
+  let menuBtn = document.getElementById('menu-btn');
+  let slideMenu = document.getElementById('slide-menu');
+  let slideMenuShade = document.getElementById('slide-menu-shade');
+  let menuRovers = document.getElementById('menu-fordon');
+  let menuHome = document.getElementById('menu-home');
+  let menuMember = document.getElementById('menu-member');
+  let menuRecommend = document.getElementById('menu-recommendation');
+  let mainContainer = document.getElementById('container-main');
+  let logoBtn = document.getElementById('logo');
+  let nasaLogo = document.getElementById('nasa-logo');
   // App pages
-  var pages = ['Home', 'Rovers', 'Recommendations', 'Members'];
+  let pages = ['Home', 'Rovers', 'Recommendations', 'Members'];
 
   // Set current rover
-  var rovers = ['Opportunity', 'Spirit', 'Curiosity'];
-  // var currentRover = rovers[2];
-  var chosenDate = null;
-  var currentRoverObject = {};
-  var currentRoverManifest = {};
-  var currentPage = 'Home';
+  let rovers = ['Opportunity', 'Spirit', 'Curiosity'];
+  // let currentRover = rovers[2];
+  let chosenDate = null;
+  let currentRoverObject = {};
+  let currentRoverManifest = {};
+  let currentPage = 'Home';
 
   /************ NASA Mars Rover APIEndpoints ****************/
 
@@ -84,7 +76,7 @@
                 </div>
               </div>
             </div>`;
-    var roversBtn = document.getElementById('rovers-btn');
+    let roversBtn = document.getElementById('rovers-btn');
     roversBtn.addEventListener('click', () => {
       console.log('click');
       pickRoverView();
@@ -132,21 +124,21 @@
               </div>
             </div>
             `;
-    var curiosityLink = document.getElementById('Curiosity');
+    let curiosityLink = document.getElementById('Curiosity');
     curiosityLink.addEventListener('click', () => {
       mainContainer.innerHTML =
         '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
       detailsView(rovers[2]);
       hideMenu();
     });
-    var spiritLink = document.getElementById('Spirit');
+    let spiritLink = document.getElementById('Spirit');
     spiritLink.addEventListener('click', () => {
       mainContainer.innerHTML =
         '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
       detailsView(rovers[1]);
       hideMenu();
     });
-    var opportunityLink = document.getElementById('Opportunity');
+    let opportunityLink = document.getElementById('Opportunity');
     opportunityLink.addEventListener('click', () => {
       mainContainer.innerHTML =
         '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
@@ -176,10 +168,10 @@
               .then((res) => res.json())
               .then((manifestCuriosity) => {
                 // Set max date for default API call
-                var SpiritMaxDate = manifestSpirit.photo_manifest.max_date;
-                var OpportunityMaxDate =
+                let SpiritMaxDate = manifestSpirit.photo_manifest.max_date;
+                let OpportunityMaxDate =
                   manifestOpportunity.photo_manifest.max_date;
-                var CuriosityMaxDate =
+                let CuriosityMaxDate =
                   manifestCuriosity.photo_manifest.max_date;
 
                 if (
@@ -207,7 +199,7 @@
                 dataModel(
                   manifestOpportunity,
                   manifestSpirit,
-                  manifestCuriosity,
+                  manifestCuriosity
                 );
               });
           });
@@ -239,7 +231,7 @@
       mainContainer.innerHTML = `            <div class="grid-container-3">
               <div class="grid-item">
                 <div class="box" id="sho">
-                <div class="back-btn clickable" id="back-btn"><i class="fas fa-chevron-left"></i></div>
+                <div class="back-btn clickable" id="back-btn"><i class="fas fa-chevron-left" title="Tillbaka till forskningsfordon"></i></div>
                 <h2 id="rover-name"></h2>
                 <h3 id="landing-date">
                   <img src="./img/spinner.gif" class="spinner" alt="" />
@@ -291,13 +283,13 @@
               </div>
               </div>
             </div>`;
-      var roverNameTitle = document.getElementById('rover-name');
-      var roverStatus = document.getElementById('rover-status');
-      var roverLanding = document.getElementById('landing-date');
-      var roverLaunch = document.getElementById('launch-date');
-      var roverImage = document.getElementById('rover-image');
-      var earthDate = document.getElementById('earth-date');
-      var backBtn = document.getElementById('back-btn');
+      let roverNameTitle = document.getElementById('rover-name');
+      let roverStatus = document.getElementById('rover-status');
+      let roverLanding = document.getElementById('landing-date');
+      let roverLaunch = document.getElementById('launch-date');
+      let roverImage = document.getElementById('rover-image');
+      let earthDate = document.getElementById('earth-date');
+      let backBtn = document.getElementById('back-btn');
       backBtn.addEventListener('click', () => {
         pickRoverView();
       });
@@ -341,7 +333,7 @@
             // show.innerHTML = printPic;
           });
         });
-      var submitBtn = document.getElementById('submit-btn');
+      let submitBtn = document.getElementById('submit-btn');
       submitBtn.addEventListener('click', () => {
         console.log('clicked');
         showPhotos(earthDate.value, currentRover);
@@ -354,6 +346,7 @@
     firstPage();
     hideMenu();
   });
+  
   // Home btnclick
   menuHome.addEventListener('click', () => {
     firstPage();
@@ -396,7 +389,7 @@
   }
 
   function colorMenuBtn(currentPage) {
-    var originalColor = 'rgb(229, 226, 226)';
+    let originalColor = 'rgb(229, 226, 226)';
     if (currentPage == pages[0]) {
       menuHome.style.color = 'red';
       menuRovers.style.color = originalColor;
@@ -434,7 +427,7 @@
       .then((res) => res.json())
       .then((roverByEarthDate) => {
         let printPic = '';
-        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
+        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn" title="Tillbaka till datumval"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
 
         mainContainer.innerHTML = titleDiv;
 
@@ -446,7 +439,7 @@
             }
           });
         } else {
-          titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3><br/><h4>No photos captured this date</h4></div></div>`;
+          titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left" title="Tillbaka till datumval"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3><br/><h4>No photos captured this date</h4></div></div>`;
         }
         mainContainer.innerHTML = titleDiv + printPic;
         let backBtn = document.getElementById('back-btn');
@@ -468,15 +461,20 @@
                 
               </div>
               <div class="grid-item">
-                <div class="flexer text-center">Bli medlem
-                  !
+                <div class="flexer text-center">Bli medlem hos NIU!
+                  
                 </div>
                 
               </div>
               <div class="grid-item">
-                <div class="flexer text-center">Maila oss:&nbsp <a href="mailto:info@niu.se">info@niu.se</a></div>
+                <div class="flexer text-center">Maila oss din intresseanmälan:&nbsp <a href="mailto:info@niu.se">info@niu.se</a></div>
               </div>
             </div>`;
   }
   menuMember.addEventListener('click', membersPage);
+  nasaLogo.classList.add('clickable');
+  nasaLogo.addEventListener('click', () => {
+    nasaLogo.setAttribute('target', '_blank');
+    window.location.assign('http://www.nasa.gov');
+  });
 } // Incapsulation end
