@@ -27,7 +27,8 @@ namespace ProjectNasaAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            // services.AddControllers();
+            services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectNasaAPI", Version = "v1" });
@@ -46,6 +47,8 @@ namespace ProjectNasaAPI
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -53,6 +56,10 @@ namespace ProjectNasaAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                // endpoints.MapControllerRoute(
+                //     name: "default",
+                //     pattern: "{controller=MyApi}/{action=Photos}/{id?}"
+                // );
             });
         }
     }

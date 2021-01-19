@@ -5,7 +5,7 @@ namespace ProjectNasaAPI
 {
     public interface IPhotoRepo
     {
-        IEnumerable<RecommendedPhoto> Photos { get; set; }
+        IEnumerable<RecommendedPhoto> Photos { get;}
 
     }
 }

@@ -435,7 +435,7 @@ input {
   }
   .container-main {
     display: flex;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -520,6 +520,11 @@ input {
     align-items: center;
     font-size: xx-large;
   }
+  /* .pic {
+    height: 100%;
+    width: 70vw;
+    margin: 10px 0 50px;
+  } */
   
 }
   @media screen and (max-height: 600px) {
@@ -568,5 +573,10 @@ input {
     height: 95px;
     box-shadow: 2px 2px 2px 2px black;
     font-size: x-small;
+  }
+    .pic {
+    height: 60vh;
+    width: 60vw;
+    margin: 10px 0 50px;
   }
 }

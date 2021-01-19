@@ -65,8 +65,8 @@
                   <h3>Rekomendationer</h3>
                 </div>
               </div>
-              <div class="grid-5-item">
-                <div class="boxer">
+              <div class="grid-5-item" id="fact-btn">
+                <div class="boxer clickable" >
                   <h3>Intressant fakta</h3>
                 </div>
               </div>
@@ -85,6 +85,9 @@
 
     let recommendationsBtn = document.getElementById('recommedations');
     recommendationsBtn.addEventListener('click', showRecommendedPage);
+
+    let factBtn = document.getElementById('fact-btn');
+    factBtn.addEventListener('click', showFactPage)
   }
   // Show first page
   logoBtn.addEventListener('click', firstPage);
@@ -482,7 +485,7 @@
   });
 
   function showRecommendedPage() {
-    fetch('https://localhost:5001/myapi')
+    fetch('https://localhost:5001/myapi/v1/photos')
       .then((res) => res.json())
       .then((data) => {
         let print = '';
@@ -499,4 +502,31 @@
     hideMenu();
   }
   menuRecommend.addEventListener('click', showRecommendedPage);
+
+ async function showFactPage() {
+    mainContainer.innerHTML = '';
+    mainContainer.innerHTML =
+      '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
+   let MyFact = await fetch('https://localhost:5001/myapi/v1/fact');
+   let fact = await MyFact.json();
+   let factNr = 0;
+   let interestingFact = {
+     Date : fact[factNr].date,
+     RoverName: fact[factNr].rover,
+     Description: fact[factNr].description
+   }
+   console.log(interestingFact);
+
+   let interestingPicsObj = await fetch(
+     `https://api.nasa.gov/mars-photos/api/v1/rovers/${interestingFact.RoverName}/photos?earth_date=${interestingFact.Date}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
+   );
+    let pics = await interestingPicsObj.json();
+   console.log(pics);
+   let print = `<div><h4>${interestingFact.RoverName} Aktuellt</h4></div><div><h5>${interestingFact.Date}</h5></div><div><h6>${interestingFact.Description}</h4></div>`;
+   pics.photos.forEach((pic) => {
+      print += `<div><img src="${pic.img_src}"class="pic" /></div>`
+     
+   });
+   mainContainer.innerHTML = print;
+  }
 } // Incapsulation end
