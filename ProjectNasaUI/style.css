@@ -534,15 +534,16 @@ input {
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-    margin-top: 50px;
+    margin-top: 30px;
   }
   .grid-item {
-    width: fit-content;
+    width: 100%;
     justify-self: center;
     height: 130px;
+    
   }
   .box {
-    width: 25vw;
+    width: 100%;
     margin: 0;
     display: flex;
     justify-content: center;

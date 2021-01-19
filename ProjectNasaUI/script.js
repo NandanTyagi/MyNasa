@@ -56,11 +56,11 @@
                     <p>Läsa artiklar om Mars</p>
                     <p>Se bilder på Mars</p>
                     <p>Läsa om forskningsfordon som finns på Mars</p>
-                    <p>Bli medlem hos NUI.se</p>
+                    <p>Bli medlem hos NIU.se</p>
                   </div>
                 </div>
               </div>
-              <div class="grid-5-item">
+              <div class="grid-5-item clickable" id="recommedations">
                 <div class="boxer">
                   <h3>Rekomendationer</h3>
                 </div>
@@ -82,6 +82,9 @@
       pickRoverView();
     });
     colorMenuBtn('Home');
+
+    let recommendationsBtn = document.getElementById('recommedations');
+    recommendationsBtn.addEventListener('click', showRecommendedPage);
   }
   // Show first page
   logoBtn.addEventListener('click', firstPage);
@@ -199,7 +202,7 @@
                 dataModel(
                   manifestOpportunity,
                   manifestSpirit,
-                  manifestCuriosity
+                  manifestCuriosity,
                 );
               });
           });
@@ -328,7 +331,7 @@
         .then((roverByEarthDate) => {
           let printPic = '';
           roverByEarthDate.photos.forEach((el) => {
-            console.log(el);
+            console.log('Info', el);
             printPic += `<img src="${el.img_src}" alt="" class="pic">`;
             // show.innerHTML = printPic;
           });
@@ -346,7 +349,7 @@
     firstPage();
     hideMenu();
   });
-  
+
   // Home btnclick
   menuHome.addEventListener('click', () => {
     firstPage();
@@ -434,7 +437,7 @@
         if (roverByEarthDate.photos.length !== 0) {
           roverByEarthDate.photos.forEach((el) => {
             if (el.camera.name != 'CHEMCAM' && el.camera.name !== '') {
-              console.log(el.camera.name);
+              console.log('Current pic', el);
               printPic += `<img src="${el.img_src}" alt="" class="pic">`;
             }
           });
@@ -477,4 +480,23 @@
     nasaLogo.setAttribute('target', '_blank');
     window.location.assign('http://www.nasa.gov');
   });
+
+  function showRecommendedPage() {
+    fetch('https://localhost:5001/myapi')
+      .then((res) => res.json())
+      .then((data) => {
+        let print = '';
+        data.forEach((el) => {
+          print += `<div class="text-center"><h4>${el.rover}</h4><h5>${el.date}</h5><h6>${el.description}</h6></div><div > <img src="${el.url}" class="pic"/></div><br/>`;
+          console.log(el);
+        });
+        mainContainer.innerHTML = '';
+        mainContainer.innerHTML =
+          '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
+        mainContainer.innerHTML = print;
+      });
+    colorMenuBtn('Recommendations');
+    hideMenu();
+  }
+  menuRecommend.addEventListener('click', showRecommendedPage);
 } // Incapsulation end
