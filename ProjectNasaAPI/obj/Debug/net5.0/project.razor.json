@@ -15601,12 +15601,6 @@
     "CSharpLanguageVersion": 900
   },
   "RootNamespace": "ProjectNasaAPI",
-  "Documents": [
-    {
-      "FilePath": "c:\\Users\\nanda\\Desktop\\Nandan\\Webutveckling.NET Kurs\\WU20 DynamiskaWebsystem2\\Hackathon\\NASA API\\MyProjectNasaAPI\\MyNasa\\ProjectNasaAPI\\Views\\Index.cshtml",
-      "TargetPath": "Views\\Index.cshtml",
-      "FileKind": "mvc"
-    }
-  ],
+  "Documents": [],
   "SerializationFormat": "0.2"
 }

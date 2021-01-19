@@ -2,6 +2,8 @@
 {
   // Incapsulation start
 
+  //@ts-check
+
   /************* DOM Strings ***************/
   let menuBtn = document.getElementById('menu-btn');
   let slideMenu = document.getElementById('slide-menu');
@@ -13,31 +15,16 @@
   let mainContainer = document.getElementById('container-main');
   let logoBtn = document.getElementById('logo');
   let nasaLogo = document.getElementById('nasa-logo');
-  // App pages
-  let pages = ['Home', 'Rovers', 'Recommendations', 'Members'];
 
-  // Set current rover
-  let rovers = ['Opportunity', 'Spirit', 'Curiosity'];
-  // let currentRover = rovers[2];
+  /**************** Variables *****************/
+  let rovers = ['Opportunity', 'Spirit', 'Curiosity', 'MyRover'];
   let chosenDate = null;
-  let currentRoverObject = {};
   let currentRoverManifest = {};
-  let currentPage = 'Home';
 
-  /************ NASA Mars Rover APIEndpoints ****************/
-
-  // Get Rover Manifest
-  /*---`https://api.nasa.gov/mars-photos/api/v1/manifests/rover_name/?&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`*/
-
-  // Get by SOL
-  /*---`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?sol=${solNr}&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`*/
-
-  // Get by earth date
-  // `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${today}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`
-
-  /***************************************************************/
+  /*************** Page views ******************/
   // First page
   function firstPage() {
+    colorMenuBtn('Home');
     mainContainer.innerHTML = '';
     mainContainer.innerHTML = ` <div class="grid-container-5">
               <div class="grid-5-item">
@@ -76,24 +63,22 @@
                 </div>
               </div>
             </div>`;
+
+    // Event listeners for all the buttons on the first page excluding the hamburger-menu and footer
     let roversBtn = document.getElementById('rovers-btn');
     roversBtn.addEventListener('click', () => {
-      console.log('click');
+      prepareContainer();
       pickRoverView();
     });
-    colorMenuBtn('Home');
 
     let recommendationsBtn = document.getElementById('recommedations');
     recommendationsBtn.addEventListener('click', showRecommendedPage);
 
     let factBtn = document.getElementById('fact-btn');
-    factBtn.addEventListener('click', showFactPage)
+    factBtn.addEventListener('click', showFactPage);
   }
-  // Show first page
-  logoBtn.addEventListener('click', firstPage);
-  firstPage();
 
-  // Rovers menubtn clicked
+  // Rovers menu page
   function pickRoverView() {
     colorMenuBtn('Rovers');
     mainContainer.innerHTML = `
@@ -130,30 +115,32 @@
               </div>
             </div>
             `;
+
+    // Eventlisteners for each rover
+
     let curiosityLink = document.getElementById('Curiosity');
     curiosityLink.addEventListener('click', () => {
-      mainContainer.innerHTML =
-        '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
+      prepareContainer();
       detailsView(rovers[2]);
       hideMenu();
     });
+
     let spiritLink = document.getElementById('Spirit');
     spiritLink.addEventListener('click', () => {
-      mainContainer.innerHTML =
-        '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
+      prepareContainer();
       detailsView(rovers[1]);
       hideMenu();
     });
+
     let opportunityLink = document.getElementById('Opportunity');
     opportunityLink.addEventListener('click', () => {
-      mainContainer.innerHTML =
-        '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
+      prepareContainer();
       detailsView(rovers[0]);
       hideMenu();
     });
   }
 
-  // Details menubtn clicked
+  // When a rover is clicked
   function detailsView(currentRover) {
     // Get Spirit Manifest
     fetch(
@@ -199,9 +186,8 @@
                 ) {
                   chosenDate = CuriosityMaxDate;
                 }
-                // Get photos by "rover name" och "earth date"
 
-                // Pass in all API data to model function
+                // Pass in all API manifestdata to data-modelfunction and call it
                 dataModel(
                   manifestOpportunity,
                   manifestSpirit,
@@ -217,7 +203,6 @@
       console.log('API Manifest Object Opportunity ', opportunityManifest);
       console.log('API Manifest Object Spirit', spiritManifest);
       console.log('API Manifest Object Curiosity', curiosityManifest);
-      // console.log('API Manifest Object Rover by earthdate', roverByEarthDate);
       console.log('Current Rover:', currentRover);
 
       // Sync manifest to current rover
@@ -232,8 +217,9 @@
       showDetailsView(currentRoverManifest);
     }
 
+    // Create the rover-detais view with mainfest info
     function showDetailsView(currentRoverManifest) {
-      mainContainer.innerHTML = '';
+      prepareContainer();
       mainContainer.innerHTML = `            <div class="grid-container-3">
               <div class="grid-item">
                 <div class="box" id="sho">
@@ -289,6 +275,9 @@
               </div>
               </div>
             </div>`;
+
+      // Dynamically inject API Manifest info
+
       let roverNameTitle = document.getElementById('rover-name');
       let roverStatus = document.getElementById('rover-status');
       let roverLanding = document.getElementById('landing-date');
@@ -296,165 +285,84 @@
       let roverImage = document.getElementById('rover-image');
       let earthDate = document.getElementById('earth-date');
       let backBtn = document.getElementById('back-btn');
-      backBtn.addEventListener('click', () => {
-        pickRoverView();
-      });
+
       console.log('Current Rover Manifest', currentRoverManifest);
+
+      // Set available dates to rover max date
       earthDate.setAttribute(
         'max',
         currentRoverManifest.photo_manifest.max_date,
       );
       console.log('Chosen date: ', chosenDate);
-      // if(chosenDate.value == null)
+
+      // Set default date value to the most recent available date
       earthDate.setAttribute(
         'value',
         currentRoverManifest.photo_manifest.max_date,
       );
+
+      // Set rover name
       roverNameTitle.innerText = currentRover;
+
+      // Set rover status
       roverStatus.innerHTML =
         'Status: ' + currentRoverManifest.photo_manifest.status;
+
+      // Set launch date
       roverLaunch.innerHTML =
         'Uppskjutningsdatum: ' +
         currentRoverManifest.photo_manifest.launch_date;
+
+      // Set landing date
       roverLanding.innerHTML =
         'Landningsdatum: ' + currentRoverManifest.photo_manifest.landing_date;
+
+      // Set rover image
       roverImage.innerHTML = `<img
                 src="./img/${currentRover}.jpg"
                 class="rover-img"
-              
               />`;
 
-      if (chosenDate != currentRoverManifest.photo_manifest.max_date) {
-        chosenDate = earthDate.value;
-      }
-      fetch(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/${currentRover}/photos?earth_date=${chosenDate}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
-      )
-        .then((res) => res.json())
-        .then((roverByEarthDate) => {
-          let printPic = '';
-          roverByEarthDate.photos.forEach((el) => {
-            console.log('Info', el);
-            printPic += `<img src="${el.img_src}" alt="" class="pic">`;
-            // show.innerHTML = printPic;
-          });
-        });
+      backBtn.addEventListener('click', () => {
+        prepareContainer();
+        pickRoverView();
+      });
+
       let submitBtn = document.getElementById('submit-btn');
       submitBtn.addEventListener('click', () => {
-        console.log('clicked');
         showPhotos(earthDate.value, currentRover);
       });
     }
   }
 
-  // Logo click
-  logoBtn.addEventListener('click', () => {
-    firstPage();
-    hideMenu();
-  });
+  // When "Intresting fact" button is clicked my own API is called
+  async function showFactPage() {
+    prepareContainer();
+    let MyFact = await fetch('https://localhost:5001/myapi/v1/fact'); // First call to MyAPI
+    let fact = await MyFact.json();
+    let factNr = 0; // In case multiple facts are added in the future
+    let interestingFact = {
+      Date: fact[factNr].date,
+      RoverName: fact[factNr].rover,
+      Description: fact[factNr].description,
+    };
+    // Logging my own API data object
+    console.log(interestingFact);
 
-  // Home btnclick
-  menuHome.addEventListener('click', () => {
-    firstPage();
-    hideMenu();
-  });
-  // Hamburger menu
-  menuBtn.addEventListener('click', () => {
-    menuBtn.classList.toggle('open');
-    if (menuBtn.classList.contains('open')) {
-      menuBtn.innerHTML = '<i class="fas fa-times"></i>';
-      slideMenu.style.visibility = 'visible';
-      slideMenuShade.style.visibility = 'visible';
-    } else {
-      menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-      slideMenu.style.visibility = 'hidden';
-      slideMenuShade.style.visibility = 'hidden';
-    }
-  });
+    // Use info from my own API to call NASAs API
+    let interestingPicsObj = await fetch(
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${interestingFact.RoverName}/photos?earth_date=${interestingFact.Date}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
+    );
+    let pics = await interestingPicsObj.json();
 
-  menuRovers.addEventListener('click', () => {
-    console.log('clicked');
-    mainContainer.innerHTML =
-      '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
-    pickRoverView();
-    hideMenu();
-  });
+    // Logging my chosen NASA API data
+    console.log(pics);
 
-  // menuDetails.addEventListener('click', () => {
-  //   mainContainer.innerHTML =
-  //     '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
-  //   detailsView(rovers[2]);
-  //   hideMenu();
-  // });
-
-  function hideMenu() {
-    menuBtn.classList.remove('open');
-    slideMenu.style.visibility = 'hidden';
-    slideMenuShade.style.visibility = 'hidden';
-    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-  }
-
-  function colorMenuBtn(currentPage) {
-    let originalColor = 'rgb(229, 226, 226)';
-    if (currentPage == pages[0]) {
-      menuHome.style.color = 'red';
-      menuRovers.style.color = originalColor;
-      menuRecommend.style.color = originalColor;
-      menuMember.style.color = originalColor;
-    }
-    if (currentPage == pages[1]) {
-      menuHome.style.color = originalColor;
-      menuRovers.style.color = 'red';
-      menuRecommend.style.color = originalColor;
-      menuMember.style.color = originalColor;
-    }
-    if (currentPage == pages[2]) {
-      menuHome.style.color = originalColor;
-      menuRovers.style.color = originalColor;
-      menuRecommend.style.color = 'red';
-      menuMember.style.color = originalColor;
-    }
-
-    if (currentPage == pages[3]) {
-      menuHome.style.color = originalColor;
-      menuRovers.style.color = originalColor;
-      menuRecommend.style.color = originalColor;
-      menuMember.style.color = 'red';
-    }
-  }
-
-  function showPhotos(chosenDate, currentRover) {
-    mainContainer.innerHTML = '';
-    mainContainer.innerHTML =
-      '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
-    fetch(
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${currentRover}/photos?earth_date=${chosenDate}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
-    )
-      .then((res) => res.json())
-      .then((roverByEarthDate) => {
-        let printPic = '';
-        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn" title="Tillbaka till datumval"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
-
-        mainContainer.innerHTML = titleDiv;
-
-        if (roverByEarthDate.photos.length !== 0) {
-          roverByEarthDate.photos.forEach((el) => {
-            if (el.camera.name != 'CHEMCAM' && el.camera.name !== '') {
-              console.log('Current pic', el);
-              printPic += `<img src="${el.img_src}" alt="" class="pic">`;
-            }
-          });
-        } else {
-          titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left" title="Tillbaka till datumval"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3><br/><h4>No photos captured this date</h4></div></div>`;
-        }
-        mainContainer.innerHTML = titleDiv + printPic;
-        let backBtn = document.getElementById('back-btn');
-        backBtn.addEventListener('click', () => {
-          mainContainer.innerHTML =
-            '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
-          detailsView(currentRover);
-        });
-      });
+    let print = `<div class=text-center><div><h4>${interestingFact.RoverName} Aktuellt</h4></div><div><h5>${interestingFact.Date}</h5></div><div><h6>${interestingFact.Description}</h4></div></div>`;
+    pics.photos.forEach((pic) => {
+      print += `<div><img src="${pic.img_src}"class="pic" loading="lazy" /></div>`;
+    });
+    mainContainer.innerHTML = print;
   }
 
   function membersPage() {
@@ -477,56 +385,178 @@
               </div>
             </div>`;
   }
-  menuMember.addEventListener('click', membersPage);
-  nasaLogo.classList.add('clickable');
-  nasaLogo.addEventListener('click', () => {
-    nasaLogo.setAttribute('target', '_blank');
-    window.location.assign('http://www.nasa.gov');
-  });
 
+  // Show recommended page
   function showRecommendedPage() {
-    fetch('https://localhost:5001/myapi/v1/photos')
-      .then((res) => res.json())
-      .then((data) => {
-        let print = '';
-        data.forEach((el) => {
-          print += `<div class="text-center"><h4>${el.rover}</h4><h5>${el.date}</h5><h6>${el.description}</h6></div><div > <img src="${el.url}" class="pic"/></div><br/>`;
-          console.log(el);
+    prepareContainer();
+    let print = '';
+    rovers.forEach(rover => {
+      fetch(`https://localhost:5001/myapi/v1/photos/${rover}`) // Second call to MyAPI with parameter
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach(el => {
+            console.log(el.rover);
+            print += `<div class="text-center"><h4>${el.rover}</h4><h5>${el.date}</h5><h6>${el.description}</h6></div><div class="center"> <img src="${el.url}" class="pic" loading="lazy"/></div><br/>`;
+          })
+          
+          mainContainer.innerHTML = print;
         });
-        mainContainer.innerHTML = '';
-        mainContainer.innerHTML =
-          '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
-        mainContainer.innerHTML = print;
-      });
+        
+      })
     colorMenuBtn('Recommendations');
     hideMenu();
   }
-  menuRecommend.addEventListener('click', showRecommendedPage);
 
- async function showFactPage() {
+  // Show photos from chosen date and rover
+  function showPhotos(chosenDate, currentRover) {
+    prepareContainer();
+    fetch(
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${currentRover}/photos?earth_date=${chosenDate}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
+    )
+      .then((res) => res.json())
+      .then((roverByEarthDate) => {
+        let printPic = '';
+        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn" title="Tillbaka till datumval"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
+
+        // Display title (Rover name and date)
+        mainContainer.innerHTML = titleDiv;
+
+        if (roverByEarthDate.photos.length !== 0) {
+          roverByEarthDate.photos.forEach((el) => {
+            if (el.camera.name != 'CHEMCAM' && el.camera.name !== '') {
+              console.log('Current pic', el);
+              printPic += `<img src="${el.img_src}" alt="" class="pic" loading="lazy">`;
+            }
+          });
+        } else {
+          // If no photos captured that day
+          titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left" title="Tillbaka till datumval"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3><br/><h4>No photos captured this date</h4></div></div>`;
+        }
+        // Display photos
+        mainContainer.innerHTML = titleDiv + printPic;
+
+        let backBtn = document.getElementById('back-btn');
+        backBtn.addEventListener('click', () => {
+          prepareContainer();
+          detailsView(currentRover);
+        });
+      });
+  }
+
+  /******************* Helper functions*********************/
+  // Hides the menu and changes the cross to hamburger
+  function hideMenu() {
+    menuBtn.classList.remove('open');
+    slideMenu.style.visibility = 'hidden';
+    slideMenuShade.style.visibility = 'hidden';
+    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+  }
+
+  // Colors the active nav menu button in the appropriate color
+  function colorMenuBtn(currentPage) {
+    let originalColor = 'rgb(229, 226, 226)';
+    let activeColor = 'red';
+    let pages = ['Home', 'Rovers', 'Recommendations', 'Members']; // App pages
+
+    if (currentPage == pages[0]) {
+      menuHome.style.color = activeColor;
+      menuRovers.style.color = originalColor;
+      menuRecommend.style.color = originalColor;
+      menuMember.style.color = originalColor;
+    }
+    if (currentPage == pages[1]) {
+      menuHome.style.color = originalColor;
+      menuRovers.style.color = activeColor;
+      menuRecommend.style.color = originalColor;
+      menuMember.style.color = originalColor;
+    }
+    if (currentPage == pages[2]) {
+      menuHome.style.color = originalColor;
+      menuRovers.style.color = originalColor;
+      menuRecommend.style.color = activeColor;
+      menuMember.style.color = originalColor;
+    }
+
+    if (currentPage == pages[3]) {
+      menuHome.style.color = originalColor;
+      menuRovers.style.color = originalColor;
+      menuRecommend.style.color = originalColor;
+      menuMember.style.color = activeColor;
+    }
+  }
+
+  // Empties main container an adds a spinner in the background
+  function prepareContainer() {
     mainContainer.innerHTML = '';
     mainContainer.innerHTML =
       '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
-   let MyFact = await fetch('https://localhost:5001/myapi/v1/fact');
-   let fact = await MyFact.json();
-   let factNr = 0;
-   let interestingFact = {
-     Date : fact[factNr].date,
-     RoverName: fact[factNr].rover,
-     Description: fact[factNr].description
-   }
-   console.log(interestingFact);
-
-   let interestingPicsObj = await fetch(
-     `https://api.nasa.gov/mars-photos/api/v1/rovers/${interestingFact.RoverName}/photos?earth_date=${interestingFact.Date}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
-   );
-    let pics = await interestingPicsObj.json();
-   console.log(pics);
-   let print = `<div><h4>${interestingFact.RoverName} Aktuellt</h4></div><div><h5>${interestingFact.Date}</h5></div><div><h6>${interestingFact.Description}</h4></div>`;
-   pics.photos.forEach((pic) => {
-      print += `<div><img src="${pic.img_src}"class="pic" /></div>`
-     
-   });
-   mainContainer.innerHTML = print;
   }
+
+  /********************* Event listeners ***********************/
+
+  // When the NIU.se logo is clicked
+  logoBtn.addEventListener('click', firstPage);
+
+  // Logo click
+  logoBtn.addEventListener('click', () => {
+    prepareContainer();
+    firstPage();
+    hideMenu();
+  });
+
+  // Hamburger menu
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('open');
+    if (menuBtn.classList.contains('open')) {
+      menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+      slideMenu.style.visibility = 'visible';
+      slideMenuShade.style.visibility = 'visible';
+    } else {
+      menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      slideMenu.style.visibility = 'hidden';
+      slideMenuShade.style.visibility = 'hidden';
+    }
+  });
+
+  // Home btnclick
+  menuHome.addEventListener('click', () => {
+    prepareContainer();
+    firstPage();
+    hideMenu();
+  });
+
+  // When rovers menu button is clicked
+  menuRovers.addEventListener('click', () => {
+    prepareContainer();
+    pickRoverView();
+    hideMenu();
+  });
+
+  // When recommended page menu button is clicked
+  menuRecommend.addEventListener('click', showRecommendedPage);
+
+  // When members menu page button is clicked
+  menuMember.addEventListener('click', membersPage);
+
+  // When NASA logo in footer is clicked
+  nasaLogo.addEventListener('click', () => {
+    window.location.assign('http://www.nasa.gov');
+  });
+  nasaLogo.classList.add('clickable');
+
+  // Show first page on start
+  firstPage();
+
+  /************ NASA Mars Rover APIEndpoints ****************/
+
+  // Get Rover Manifest
+  /*---`https://api.nasa.gov/mars-photos/api/v1/manifests/rover_name/?&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`*/
+
+  // Get by SOL
+  /*---`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?sol=${solNr}&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`*/
+
+  // Get by earth date
+  // `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?earth_date=${today}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`
+
+  /***************************************************************/
 } // Incapsulation end
