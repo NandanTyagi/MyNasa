@@ -15,6 +15,10 @@ h1,
 h3 {
   font-weight: 100;
 }
+hr {
+  width: 100%;
+  color: transparent;
+}
 
 .container-all {
   background-image: url('https://cdn.spacetelescope.org/archives/images/wallpaper1/opo0124a.jpg');
@@ -55,6 +59,7 @@ h3 {
 .logo {
   font-size: 2em;
   font-weight: 700;
+  cursor: pointer;
 }
 .menu-btn i {
   font-size: 2em;
@@ -67,13 +72,77 @@ container-main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: fit-content;
+}
+.grid-container-5 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat (5, 1fr);
+  height: 81vh;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.grid-container-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat (3, 100px);
+  height: 82vh;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.grid-item,.grid-5-item {
+  position: relative;
+  height: 100%;
+  box-shadow: 2px 2px 2px 2px black;
+}
+.rover-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+
+  opacity: 0.5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
+.rover-shade-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  cursor: pointer;
+}
+.rover-single {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.rover-single::after {
+  content: 'hlkhlk';
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  z-index: 10;
 }
 .box {
-  margin: 1em;
+  margin: 0;
   padding: 1.5em;
   border: 1px solid rgb(82, 81, 81);
   text-align: center;
-  height: min-content;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,9 +165,49 @@ container-main {
 .box:last-of-type {
   margin-bottom: 0;
 }
+.boxer {
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    border: none;
+    height: 100%;
+    text-align: center;
+  }
+  .flexer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  #flexer {
+    display: flex;
+    flex-direction: column;
+  }
+.boxer h3 {
+  text-align: center;
+}
+.boxer ul {
+  justify-self: center;
+}
+.boxer li {
+  list-style-type: disc;
+  text-align: start;
+  margin-left: 4em;
+  margin-right: 2em;
+}
+.boxer:last-of-type {
+  margin-bottom: 0;
+}
 
 .pic {
-  width: 100vw;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0.5em;
 }
 
 .container-footer {
@@ -162,146 +271,27 @@ container-main {
 }
 .list-items li {
   list-style: none;
+  text-align: center;
 }
 .rover-img {
-  height: 200px;
+  height: 100%;
   width: 100%;
-}
-.rover-shade1::after {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  content: 'Curiosity';
-  color: white;
-  text-align: center;
-  text-justify: center;
-  font-size: xx-large;
-  background-color: transparent;
-  opacity: 1;
-  position: absolute;
-  top: 81px;
-  right: 0%;
-  height: 218.75px;
-  width: 100%;
-  padding-top: 0;
-  /* visibility: hidden; */
-}
-.rover-shade2::after {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    content: '';
-    color: white;
-    text-align: center;
-    text-justify: center;
-    font-size: xx-large;
-    background-color: black;
-    opacity: 0.5;
-    position: absolute;
-    top: 81px;
-    right: 0%;
-    height: 218.75px;
-    width: 100%;
-    padding-top: 0;
-    /* visibility: hidden; */
-}
-.rover-shade3::after {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  content: 'Spirit';
-  color: white;
-  text-align: center;
-  text-justify: center;
-  font-size: xx-large;
-  background-color: transparent;
-  opacity: 1;
-  position: absolute;
-  top: 304px;
-  right: 0%;
-  height: 218.75px;
-  width: 100%;
-  padding-top: 0;
-  /* visibility: hidden; */
-}
-.rover-shade4::after {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    content: '';
-  color: white;
-  text-align: center;
-  text-justify: center;
-  font-size: xx-large;
-  background-color: black;
-  opacity: 0.5;
-  position: absolute;
-  top: 304px;
-  right: 0%;
-  height: 218.75px;
-  width: 100%;
-  padding-top: 0;
-  /* visibility: hidden; */
-}
-.rover-shade5::after {
-    display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  content: 'Opportunity';
-  color: white;
-  text-align: center;
-  text-justify: center;
-  font-size: xx-large;
-  background-color: transparent;
-  opacity: 1;
-  position: absolute;
-  top: 524px;
-  right: 0%;
-  height: 218.75px;
-  width: 100%;
-  padding-top: 0;
-  /* visibility: hidden; */
-}
-.rover-shade6::after {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    content: '';
-  color: white;
-  text-align: center;
-  text-justify: center;
-  font-size: xx-large;
-  background-color: black;
-  opacity: 0.5;
-  position: absolute;
-  top: 525px;
-  right: 0%;
-  height: 218.75px;
-  width: 100%;
-  padding-top: 0;
-  /* visibility: hidden; */
 }
 
 #rover-image {
   padding: 0;
 }
-.rover-single {
-  width: 100%;
-}
+
 .spinner {
   height: 89px;
 }
 .spinner-center {
   position: absolute;
-  top: 40%;
-  right: 40%;
+  top: 50%;
+  right: 50%;
   height: 80px;
+  transform: translateX(50%);
+  
 }
 /* Form */
 form {
@@ -318,7 +308,7 @@ input {
 }
 .flex-row:first-of-type {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 80%;
 }
 .flex-row {
@@ -330,27 +320,96 @@ input {
   display: flex;
   justify-content: center;
   width: 40%;
+  margin-bottom: 5px;
 }
 .submit-btn {
   background-color: black;
-  color: white;
+  color: rgb(229, 226, 226);
   padding: 0.3em;
   margin: 0;
   border-color: red;
   cursor: pointer;
   width: 100%;
+  font-weight: 700;
+  border-radius: 5px;
 }
 .clickable {
-    cursor: pointer;
+  cursor: pointer;
+}
+.menu-item {
+  cursor: pointer;
+}
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  font-size: medium;
+}
+.title {
+  text-align: center;
+  position: relative;
+  font-size: x-small;
+}
+.fixed {
+  position: fixed;
+  width: 100%;
+  background-color: black;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 50%;
+  padding: 5px;
+}
+.text-center {
+  text-align: center;
+  font-size: x-large;
 }
 
-@media screen and (min-width: 900px) {
+.text-center > a {
+  color: white;
+  cursor: pointer;
+}
+@media screen and (min-width: 1000px) {
+  body {
+    overflow: hidden;
+  }
   .box {
-    width: 50vw;
-    margin: 1em auto;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     justify-self: center;
     align-self: center;
     border: none;
+  }
+  .boxer {
+    width: 25vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    border: none;
+    height: 100%;
+    text-align: center;
+  }
+  .flexer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  #flexer {
+    display: flex;
+    flex-direction: column;
+  }
+  .list-items {
+    padding: 0 1em;
+    line-height: 1.3;
   }
   .box ul li {
     align-self: center;
@@ -362,11 +421,152 @@ input {
     width: 20%;
     opacity: 0.4;
   }
+
   .rover-img {
     height: 300px;
+    width: 100%;
     border-radius: 5px;
   }
   #rover-image {
+    width: 100%;
+  }
+  .rover-single {
+    width: 100%;
+  }
+  .container-main {
+    display: flex;
+    padding-bottom: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .container-main::-webkit-scrollbar {
+    display: none;
+  }
+  .grid-container-3 {
+    display: grid;
+    height: 50vh;
+    gap: 1em;
     width: fit-content;
+    grid-template-columns: repeat(1, 400px);
+    grid-template-rows: 40%;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 50px;
+  }
+  .grid-container-5 {
+    margin-top: 1em;
+    height: 70%;
+    gap: 1em;
+    width: fit-content;
+  }
+  .grid-item {
+    width: 100%;
+    justify-self: center;
+    height: 180px;
+  }
+  .grid-5-item {
+    width: fit-content;
+    justify-self: center;
+    height: 130px;
+    box-shadow: 2px 2px 2px 2px black;
+    font-size: small;
+  }
+  .rover-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+
+  opacity: 0.5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
+  .rover-shade-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+  }
+  .rover-shade-text:hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    opacity: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+  }
+  
+}
+  @media screen and (max-height: 600px) {
+  .grid-container-3 {
+    display: grid;
+    height: 50vh;
+    gap: 1em;
+    width: fit-content;
+    grid-template-columns: repeat(1, 400px);
+    grid-template-rows: 40%;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 30px;
+  }
+  .grid-item {
+    width: 100%;
+    justify-self: center;
+    height: 130px;
+    
+  }
+  .box {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    border: none;
+    height: 100%;
+    
+  }
+   .grid-5-item {
+    width: fit-content;
+    justify-self: center;
+    height: 70px;
+    box-shadow: 2px 2px 2px 2px black;
+    font-size: x-small;
+  }
+   .grid-5-item:nth-of-type(2) {
+    width: fit-content;
+    justify-self: center;
+    height: 95px;
+    box-shadow: 2px 2px 2px 2px black;
+    font-size: x-small;
   }
 }
