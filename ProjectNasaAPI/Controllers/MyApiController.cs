@@ -18,7 +18,7 @@ namespace ProjectNasaAPI.Controllers
         public IActionResult Photos()
         {
             MockPhotoRepo mockPhotoRepo = new MockPhotoRepo();
-            return Ok(mockPhotoRepo.Photos);
+            return Ok(mockPhotoRepo.RecommendedPhotos);
         }
        
         [HttpGet("[action]/{rover}")]
@@ -42,7 +42,19 @@ namespace ProjectNasaAPI.Controllers
         public IActionResult Fact()
         {
             MockDateRepo mockDateRepo = new MockDateRepo();
-            return Ok(mockDateRepo.AllDates);
+            return Ok(mockDateRepo.RecommendedDates);
+        }   
+        [HttpGet("[action]")]
+        public IActionResult Rovers()
+        {
+            MockRoverRepo mockRoverRepo = new MockRoverRepo();
+            return Ok(mockRoverRepo.Rovers);
+        }   
+        [HttpGet("[action]")]
+        public IActionResult All()
+        {
+            MockAllReposRepo mockAllReposRepo = new MockAllReposRepo();
+            return Ok(mockAllReposRepo.AllRepos);
         }   
     }
 }

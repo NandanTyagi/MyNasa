@@ -4,16 +4,17 @@ using System.Linq;
 namespace ProjectNasaAPI
 {
 
-    public class MockDateRepo : IDateRepo
+    public partial class MockDateRepo
     {
-        public IEnumerable<RecomendedDate> AllDates => new List<RecomendedDate>
+        MockRoverRepo roverRepo = new MockRoverRepo();
+        public IEnumerable<RecomendedDate> RecommendedDates => new List<RecomendedDate>
         {
-            new RecomendedDate{Id = 1, Rover = "Curiosity", Date = "2021-01-18", Description = "Curiosity har fått problem med ett av sina däck nyligen! Hur ska NASA lösa detta?"}
+            new RecomendedDate{Id = 1, Rover = roverRepo.GetRover("Curiosity"), Date = "2021-01-18", Description = "Har fanns det bilder på Curiositys skadade däck, men nasa har ersatt dem med dessa bilder?"}
         };
 
         public IEnumerable<RecomendedDate> GetDateById(int id)
         {
-            return AllDates.Where(d => d.Id == id);
+            return RecommendedDates.Where(d => d.Id == id);
         }
     }
 

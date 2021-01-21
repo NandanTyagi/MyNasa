@@ -6,7 +6,7 @@ namespace ProjectNasaAPI
 {
     public partial class MockPhotoRepo : IPhotoRepo
     {
-        public IEnumerable<RecommendedPhoto> Photos => new List<RecommendedPhoto>
+        public IEnumerable<RecommendedPhoto> RecommendedPhotos => new List<RecommendedPhoto>
         {
             new RecommendedPhoto{Id = 1, Rover = "Curiosity", Date = "2021-01-18", Url = "https://mars.nasa.gov/msl-raw-images/msss/03005/mhli/3005MH0007700011100097E01_DXXX.jpg", Description = "Detta kan innebära problem!!" },
             new RecommendedPhoto{Id = 2, Rover = "Opportunity", Date = "2010-02-01" , Url = "http://mars.nasa.gov/mer/gallery/all/1/p/2141/1P318250636EFFAB66P2369L2M1-BR.JPG", Description = "Typisk Marsianskt landskap"},
@@ -17,7 +17,7 @@ namespace ProjectNasaAPI
         };
         public IEnumerable<RecommendedPhoto> GetPhoto(string rover)
         {
-           return Photos.ToList().Where(p => p.Rover == rover);
+           return RecommendedPhotos.ToList().Where(p => p.Rover == rover);
         }
     }
 }

@@ -342,6 +342,7 @@ input {
 .menu-item {
   cursor: pointer;
 }
+
 .back-btn {
   position: absolute;
   top: 20px;
@@ -386,10 +387,14 @@ a:hover {
   transform: scale(1.05);
   transition: transform 0.2s ease;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 750px) {
   body {
     overflow: hidden;
   }
+  .menu-item:hover {
+  transform: scale(1.1);
+  transition: transform 0.1s ease;
+}
   .box {
     width: 100%;
     margin: 0;
@@ -502,9 +507,7 @@ a:hover {
   height: 100%;
   width: 100%;
   background-color: black;
-
   opacity: 0.5;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -536,14 +539,18 @@ a:hover {
     align-items: center;
     font-size: xx-large;
   }
-  /* .pic {
-    height: 100%;
-    width: 70vw;
-    margin: 10px 0 50px;
-  } */
+  .pic {
+    height: 70vh;
+    width: initial;
+    margin: 10px auto 2px auto;
+  }
+  .container-footer-clearfix {
+    background-color: transparent;
+    margin-top: 155px;
+  }
   
 }
-  @media screen and (max-height: 600px) {
+  @media screen and (max-height: 750px) {
   .grid-container-3 {
     display: grid;
     height: 50vh;
@@ -594,6 +601,10 @@ a:hover {
     height: 60vh;
     width: 60vw;
     margin: 10px 0 50px;
+  }
+    .container-footer-clearfix {
+    background-color: transparent;
+    margin-top: 70px;
   }
 }
 

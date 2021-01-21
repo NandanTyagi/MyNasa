@@ -4,7 +4,7 @@ namespace ProjectNasaAPI
 {
     public interface IDateRepo
     {
-        IEnumerable<RecomendedDate> AllDates { get; }
+        IEnumerable<RecomendedDate> RecommendedDates { get; }
     }
 
 }

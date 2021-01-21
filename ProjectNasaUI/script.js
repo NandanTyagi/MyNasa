@@ -1,25 +1,51 @@
+// //@ts-check
 'use strict';
 {
   // Incapsulation start
 
-  //@ts-check
-
+async function init() {
   /************* DOM Strings ***************/
-  let menuBtn = document.getElementById('menu-btn');
-  let slideMenu = document.getElementById('slide-menu');
-  let slideMenuShade = document.getElementById('slide-menu-shade');
-  let menuRovers = document.getElementById('menu-fordon');
-  let menuHome = document.getElementById('menu-home');
-  let menuMember = document.getElementById('menu-member');
-  let menuRecommend = document.getElementById('menu-recommendation');
-  let mainContainer = document.getElementById('container-main');
-  let logoBtn = document.getElementById('logo');
-  let nasaLogo = document.getElementById('nasa-logo');
+  const menuBtn = document.getElementById('menu-btn');
+  const slideMenu = document.getElementById('slide-menu');
+  const slideMenuShade = document.getElementById('slide-menu-shade');
+  const menuRovers = document.getElementById('menu-fordon');
+  const menuHome = document.getElementById('menu-home');
+  const menuMember = document.getElementById('menu-member');
+  const menuRecommend = document.getElementById('menu-recommendation');
+  const mainContainer = document.getElementById('container-main');
+  const logoBtn = document.getElementById('logo');
+  const nasaLogo = document.getElementById('nasa-logo');
+  const OpportunityInfoUrl =
+    'https://en.wikipedia.org/wiki/Opportunity_(rover)';
+  const SpiritInfoUrl = 'https://sv.wikipedia.org/wiki/Spirit_(rymdfordon)';
+  const CuriosityInfoUrl = 'https://en.wikipedia.org/wiki/Curiosity_(rover)';
+
+  let nasaApi = {};
 
   /**************** Variables *****************/
-  let rovers = ['Opportunity', 'Spirit', 'Curiosity', 'MyRover'];
+  let rovers = [];
   let chosenDate = null;
   let currentRoverManifest = {};
+
+
+
+  let myApi = {};
+  async function getAllFromMyApi() {
+    let res = await fetch('https://localhost:5001/myapi/v1/all');
+    let data = await res.json();
+    myApi.data = data;
+  }
+  await getAllFromMyApi();
+  console.log('MyAPI', myApi);
+  for (let i = 0; i < 3; i++) {
+    
+  }
+  console.log(myApi)
+  myApi.data[0].rovers.forEach(rover => {
+    rovers.push(rover.name);
+  })
+  rovers = myApi.data[0].rovers;
+  console.log(rovers);
 
   /*************** Page views ******************/
   // First page
@@ -121,21 +147,21 @@
     let curiosityLink = document.getElementById('Curiosity');
     curiosityLink.addEventListener('click', () => {
       prepareContainer();
-      detailsView(rovers[2]);
+      detailsView(rovers[2].name);
       hideMenu();
     });
 
     let spiritLink = document.getElementById('Spirit');
     spiritLink.addEventListener('click', () => {
       prepareContainer();
-      detailsView(rovers[1]);
+      detailsView(rovers[1].name);
       hideMenu();
     });
 
     let opportunityLink = document.getElementById('Opportunity');
     opportunityLink.addEventListener('click', () => {
       prepareContainer();
-      detailsView(rovers[0]);
+      detailsView(rovers[0].name);
       hideMenu();
     });
   }
@@ -219,6 +245,11 @@
 
     // Create the rover-detais view with mainfest info
     function showDetailsView(currentRoverManifest) {
+      let currRov = currentRoverManifest.photo_manifest.name;
+      let currentUrl = '';
+      if (currRov == rovers[0].name) currentUrl = OpportunityInfoUrl;
+      if (currRov == rovers[1].name) currentUrl = SpiritInfoUrl;
+      if (currRov == rovers[2].name) currentUrl = CuriosityInfoUrl;
       prepareContainer();
       mainContainer.innerHTML = `            <div class="grid-container-3">
               <div class="grid-item">
@@ -230,6 +261,7 @@
                 </h3>
                 <h3 id="launch-date"></h3>
                 <h4 id="rover-status"></h4>
+                <h5><a href="${currentUrl}" target="_blank" style="color:red;" class="clickable">Mer info </a>
               </div>
               </div>
               <div class="grid-item">
@@ -274,6 +306,7 @@
                 </div>
               </div>
               </div>
+              
             </div>`;
 
       // Dynamically inject API Manifest info
@@ -343,22 +376,22 @@
     let factNr = 0; // In case multiple facts are added in the future
     let interestingFact = {
       Date: fact[factNr].date,
-      RoverName: fact[factNr].rover,
+      Rover: fact[factNr].rover,
       Description: fact[factNr].description,
     };
     // Logging my own API data object
-    console.log(interestingFact);
+    console.log('Intresting fact', interestingFact);
 
     // Use info from my own API to call NASAs API
     let interestingPicsObj = await fetch(
-      `https://api.nasa.gov/mars-photos/api/v1/rovers/${interestingFact.RoverName}/photos?earth_date=${interestingFact.Date}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
+      `https://api.nasa.gov/mars-photos/api/v1/rovers/${interestingFact.Rover.name}/photos?earth_date=${interestingFact.Date}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
     );
     let pics = await interestingPicsObj.json();
 
     // Logging my chosen NASA API data
-    console.log(pics);
+    console.log('Chosen pics', pics);
 
-    let print = `<div class=text-center><div><h4>${interestingFact.RoverName} Aktuellt</h4></div><div><h5>${interestingFact.Date}</h5></div><div><h6>${interestingFact.Description}</h4></div></div>`;
+    let print = `<div class=text-center><div><h4>${interestingFact.Rover.name} Aktuellt</h4></div><div><h5>${interestingFact.Date}</h5></div><div><h6>${interestingFact.Description}</h4></div></div>`;
     pics.photos.forEach((pic) => {
       print += `<div><img src="${pic.img_src}"class="pic" loading="lazy" /></div>`;
     });
@@ -390,19 +423,22 @@
   function showRecommendedPage() {
     prepareContainer();
     let print = '';
-    rovers.forEach(rover => {
-      fetch(`https://localhost:5001/myapi/v1/photos/${rover}`) // Second call to MyAPI with parameter
+    let counter = 0;
+    rovers.forEach((rover) => {
+      fetch(`https://localhost:5001/myapi/v1/photos/${rover.name}`) // Second call to MyAPI with parameter
         .then((res) => res.json())
         .then((data) => {
-          data.forEach(el => {
-            console.log(el.rover);
+          data.forEach((el) => {
+            console.log(el);
             print += `<div class="text-center"><h4>${el.rover}</h4><h5>${el.date}</h5><h6>${el.description}</h6></div><div class="center"> <img src="${el.url}" class="pic" loading="lazy"/></div><br/>`;
-          })
-          
+          });
+          counter++;
+          if (counter == rovers.length)
+            print += `<div class="container-footer-clearfix">Hello</div>`;
+
           mainContainer.innerHTML = print;
         });
-        
-      })
+    });
     colorMenuBtn('Recommendations');
     hideMenu();
   }
@@ -415,6 +451,7 @@
     )
       .then((res) => res.json())
       .then((roverByEarthDate) => {
+        console.log('Rover by earth date', roverByEarthDate);
         let printPic = '';
         let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn" title="Tillbaka till datumval"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
 
@@ -547,6 +584,8 @@
   // Show first page on start
   firstPage();
 
+}
+init();
   /************ NASA Mars Rover APIEndpoints ****************/
 
   // Get Rover Manifest

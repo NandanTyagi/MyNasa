@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace ProjectNasaAPI
 {
-    public interface IPhotoRepo
+    public interface IRoverRepo
     {
-        IEnumerable<RecommendedPhoto> RecommendedPhotos { get;}
-
+        IEnumerable<Rover> Rovers { get; }
     }
 }
