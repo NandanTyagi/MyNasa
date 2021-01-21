@@ -9,7 +9,7 @@ namespace ProjectNasaAPI
         MockRoverRepo roverRepo = new MockRoverRepo();
         public IEnumerable<RecomendedDate> RecommendedDates => new List<RecomendedDate>
         {
-            new RecomendedDate{Id = 1, Rover = roverRepo.GetRover("Curiosity"), Date = "2021-01-18", Description = "Har fanns det bilder på Curiositys skadade däck, men nasa har ersatt dem med dessa bilder?"}
+            new RecomendedDate{Id = 1, Rover = roverRepo.GetRover("Curiosity"), Date = "2021-01-13", Description = "Här är lite coola bilder!"}
         };
 
         public IEnumerable<RecomendedDate> GetDateById(int id)

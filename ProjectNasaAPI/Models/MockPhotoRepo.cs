@@ -12,7 +12,8 @@ namespace ProjectNasaAPI
             new RecommendedPhoto{Id = 2, Rover = "Opportunity", Date = "2010-02-01" , Url = "http://mars.nasa.gov/mer/gallery/all/1/p/2141/1P318250636EFFAB66P2369L2M1-BR.JPG", Description = "Typisk Marsianskt landskap"},
             new RecommendedPhoto{Id = 3, Rover = "Spirit", Date = "2006-06-08", Url = "http://mars.nasa.gov/mer/gallery/all/2/p/863/2P202974618EFFAS00P2629L4M1-BR.JPG", Description = "En typisk kulle på Mars"},
             new RecommendedPhoto{Id = 4, Rover = "Opportunity", Date = "2016-03-25", Url = "http://mars.nasa.gov/mer/gallery/all/1/n/4325/1N512147216EFFCPJOP1977L0M1-BR.JPG" , Description = "Fin Marsiansk vy!"},
-            new RecommendedPhoto{Id = 5, Rover = "MyRover", Date = "2021-01-19", Url = "https://www.turbo.fr/sites/default/files/styles/article_690x405/public/2020-04/widebody-range-rover-velar-rendering-looks-like-a-jdm-special-142333_1.jpg?itok=5Gpga_WA" , Description = "Jag skulle vilja ha en sådan forskningsfordon :P"}
+            new RecommendedPhoto{Id = 5, Rover = "MyRover", Date = "2021-01-19", Url = "https://www.turbo.fr/sites/default/files/styles/article_690x405/public/2020-04/widebody-range-rover-velar-rendering-looks-like-a-jdm-special-142333_1.jpg?itok=5Gpga_WA" , Description = "Jag skulle vilja ha en sådan forskningsfordon :P"},
+            new RecommendedPhoto{Id = 6, Rover = "Curiosityr", Date = "2021-01-16", Url = "https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/03003/opgs/edr/ncam/NRB_664084555EDR_S0850000NCAM00594M_.JPG" , Description = "En fin landskaps bild!"}
 
         };
         public IEnumerable<RecommendedPhoto> GetPhoto(string rover)

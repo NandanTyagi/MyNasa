@@ -66,28 +66,30 @@ async function init() {
                   <h3>På den här sidan kan du:</h3>
                   <br />
                   <div class="list-items">
-                    <p>Läsa artiklar om Mars</p>
                     <p>Se bilder på Mars</p>
                     <p>Läsa om forskningsfordon som finns på Mars</p>
                     <p>Bli medlem hos NIU.se</p>
                   </div>
                 </div>
               </div>
-              <div class="grid-5-item clickable" id="recommedations">
-                <div class="boxer">
-                  <h3>Rekomendationer</h3>
-                </div>
-              </div>
-              <div class="grid-5-item" id="fact-btn">
-                <div class="boxer clickable" >
-                  <h3>Intressant fakta</h3>
-                </div>
-              </div>
-              <div class="grid-5-item" id="rovers-btn">
+
+              <div class="grid-5-item zoom" id="rovers-btn">
                 <div class="boxer clickable">
-                  <h3>Forskningsfordon på Mars</h3>
+                  <h3 tabindex="0">Forskningsfordon på Mars</h3>
                 </div>
               </div>
+
+              <div class="grid-5-item clickable zoom" id="recommedations">
+                <div class="boxer">
+                  <h3 tabindex="0">Rekomendationer</h3>
+                </div>
+              </div>
+              <div class="grid-5-item zoom" id="fact-btn">
+                <div class="boxer clickable" >
+                  <h3 tabindex="0">Intressant fakta</h3>
+                </div>
+              </div>
+              
             </div>`;
 
     // Event listeners for all the buttons on the first page excluding the hamburger-menu and footer
@@ -102,7 +104,27 @@ async function init() {
 
     let factBtn = document.getElementById('fact-btn');
     factBtn.addEventListener('click', showFactPage);
+
+     var rec = document.getElementById('recommedations');
+
+     // Execute a function when the user releases a key on the keyboard
+     rec.addEventListener(
+       'keyup',
+       function (e) {
+         // Number 13 is the "Enter" key on the keyboard
+         if (e.key === 'enter') {
+           // Cancel the default action, if needed
+           // e.preventDefault();
+           // Trigger the button element with a click
+           document.getElementById('all').click();
+           console.log('Enter klicked');
+         }
+       },
+       true,
+     );
   }
+
+  
 
   // Rovers menu page
   function pickRoverView() {
@@ -261,7 +283,7 @@ async function init() {
                 </h3>
                 <h3 id="launch-date"></h3>
                 <h4 id="rover-status"></h4>
-                <h5><a href="${currentUrl}" target="_blank" style="color:red;" class="clickable">Mer info </a>
+                <h5><a href="${currentUrl}" target="_blank" style="color:red;" class=" clickable zoom" title="Gå till wikipedia för mer info">Mer info </a>
               </div>
               </div>
               <div class="grid-item">
@@ -281,7 +303,8 @@ async function init() {
                   <input type="date" name="earth-date" id="earth-date" />
                 </div>
                 <br />
-               <!-- <div class="flex-row">
+                
+               <!-- <div class="flex-row"> 
                   <label for="camera-FHAZ">FHAZ</label>
                   <input
                     type="checkbox"
@@ -301,8 +324,9 @@ async function init() {
                   />
                 </div>
                 <br /> -->
+
                 <div class="flex-row">
-                  <button id="submit-btn" class="submit-btn">Visa foton </button>
+                  <button id="submit-btn" class="submit-btn zoom">Visa foton </button>
                 </div>
               </div>
               </div>
@@ -453,7 +477,7 @@ async function init() {
       .then((roverByEarthDate) => {
         console.log('Rover by earth date', roverByEarthDate);
         let printPic = '';
-        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn" title="Tillbaka till datumval"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
+        let titleDiv = `<div class="fixed"><div class="title"><span class="back-btn clickable" id="back-btn" title="Tillbaka till datumval" tabindex="0"><i class="fas fa-chevron-left"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3></div></div>`;
 
         // Display title (Rover name and date)
         mainContainer.innerHTML = titleDiv;
@@ -462,12 +486,12 @@ async function init() {
           roverByEarthDate.photos.forEach((el) => {
             if (el.camera.name != 'CHEMCAM' && el.camera.name !== '') {
               console.log('Current pic', el);
-              printPic += `<img src="${el.img_src}" alt="" class="pic" loading="lazy">`;
+              printPic += `<img src="${el.img_src}" alt="" class="pic" loading="lazy" tabindex="0">`;
             }
           });
         } else {
           // If no photos captured that day
-          titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left" title="Tillbaka till datumval"></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3><br/><h4>No photos captured this date</h4></div></div>`;
+          titleDiv = `<div class="fixed"><div class="title"><span class="back-btn" id="back-btn"><i class="fas fa-chevron-left" title="Tillbaka till datumval" tabindex="0" ></i></span><h1>${currentRover}</h1><br/><h3>${chosenDate}</h3><br/><h4>No photos captured this date</h4></div></div>`;
         }
         // Display photos
         mainContainer.innerHTML = titleDiv + printPic;
@@ -486,7 +510,7 @@ async function init() {
     menuBtn.classList.remove('open');
     slideMenu.style.visibility = 'hidden';
     slideMenuShade.style.visibility = 'hidden';
-    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    menuBtn.innerHTML = '<i class="fas fa-bars" tabindex="0"></i>';
   }
 
   // Colors the active nav menu button in the appropriate color
@@ -529,7 +553,9 @@ async function init() {
       '<img src="./img/spinner.gif" class="spinner-center" alt="" />';
   }
 
-  /********************* Event listeners ***********************/
+/********************* Event listeners ***********************/
+  
+ 
 
   // When the NIU.se logo is clicked
   logoBtn.addEventListener('click', firstPage);
@@ -545,11 +571,11 @@ async function init() {
   menuBtn.addEventListener('click', () => {
     menuBtn.classList.toggle('open');
     if (menuBtn.classList.contains('open')) {
-      menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+      menuBtn.innerHTML = '<i class="fas fa-times" tabindex="0"></i>';
       slideMenu.style.visibility = 'visible';
       slideMenuShade.style.visibility = 'visible';
     } else {
-      menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      menuBtn.innerHTML = '<i class="fas fa-bars" tabindex="0"></i>';
       slideMenu.style.visibility = 'hidden';
       slideMenuShade.style.visibility = 'hidden';
     }
