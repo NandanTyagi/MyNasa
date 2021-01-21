@@ -20,15 +20,13 @@ async function init() {
   const SpiritInfoUrl = 'https://sv.wikipedia.org/wiki/Spirit_(rymdfordon)';
   const CuriosityInfoUrl = 'https://en.wikipedia.org/wiki/Curiosity_(rover)';
 
-  let nasaApi = {};
-
   /**************** Variables *****************/
   let rovers = [];
   let chosenDate = null;
   let currentRoverManifest = {};
 
 
-
+ /***************Gathering data from my Api ***********************/
   let myApi = {};
   async function getAllFromMyApi() {
     let res = await fetch('https://localhost:5001/myapi/v1/all');
@@ -405,6 +403,7 @@ async function init() {
     };
     // Logging my own API data object
     console.log('Intresting fact', interestingFact);
+    console.log('My api::', myApi);
 
     // Use info from my own API to call NASAs API
     let interestingPicsObj = await fetch(
@@ -470,6 +469,8 @@ async function init() {
   // Show photos from chosen date and rover
   function showPhotos(chosenDate, currentRover) {
     prepareContainer();
+    
+    // Call to NASA API
     fetch(
       `https://api.nasa.gov/mars-photos/api/v1/rovers/${currentRover}/photos?earth_date=${chosenDate}&page=1&api_key=JRLFjiGREcuww7SrTcrgT07X9m9AFoxJ1s6tomgw`,
     )
@@ -555,8 +556,6 @@ async function init() {
 
 /********************* Event listeners ***********************/
   
- 
-
   // When the NIU.se logo is clicked
   logoBtn.addEventListener('click', firstPage);
 
