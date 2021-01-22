@@ -93,6 +93,7 @@ async function init() {
     // Event listeners for all the buttons on the first page excluding the hamburger-menu and footer
     let roversBtn = document.getElementById('rovers-btn');
     roversBtn.addEventListener('click', () => {
+      hideMenu();
       prepareContainer();
       pickRoverView();
     });
@@ -385,6 +386,8 @@ async function init() {
 
       let submitBtn = document.getElementById('submit-btn');
       submitBtn.addEventListener('click', () => {
+        hideMenu();
+        prepareContainer();
         showPhotos(earthDate.value, currentRover);
       });
     }
@@ -392,6 +395,7 @@ async function init() {
 
   // When "Intresting fact" button is clicked my own API is called
   async function showFactPage() {
+    hideMenu();
     prepareContainer();
     let MyFact = await fetch('https://localhost:5001/myapi/v1/fact'); // First call to MyAPI
     let fact = await MyFact.json();
@@ -421,6 +425,7 @@ async function init() {
     mainContainer.innerHTML = print;
   }
 
+  // Show "members" page
   function membersPage() {
     colorMenuBtn('Members');
     hideMenu();

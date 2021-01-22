@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ProjectNasaAPI;
 
 namespace ProjectNasaAPI.Controllers
 {
@@ -13,6 +9,9 @@ namespace ProjectNasaAPI.Controllers
     [Route("[controller]/v1")]
     public class MyApiController : ControllerBase
     {
+        MockRoverRepo _mockRoverRepo = new MockRoverRepo();
+        MockDateRepo _mockDateRepo = new MockDateRepo();
+
 
         [HttpGet("[action]")]
         public IActionResult Photos()
@@ -41,14 +40,13 @@ namespace ProjectNasaAPI.Controllers
         [HttpGet("[action]")]
         public IActionResult Fact()
         {
-            MockDateRepo mockDateRepo = new MockDateRepo();
-            return Ok(mockDateRepo.RecommendedDates);
+            return Ok(_mockDateRepo.RecommendedDates);
         }   
         [HttpGet("[action]")]
         public IActionResult Rovers()
         {
-            MockRoverRepo mockRoverRepo = new MockRoverRepo();
-            return Ok(mockRoverRepo.Rovers);
+            // MockRoverRepo mockRoverRepo = new MockRoverRepo();
+            return Ok(_mockRoverRepo.Rovers);
         }   
         [HttpGet("[action]")]
         public IActionResult All()

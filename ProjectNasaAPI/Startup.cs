@@ -26,6 +26,8 @@ namespace ProjectNasaAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // services.AddScoped<IRoverRepo, MockRoverRepo>();
+            // services.AddScoped<IDateRepo, MockDateRepo>();
 
             // services.AddControllers();
             services.AddControllersWithViews();
@@ -33,6 +35,7 @@ namespace ProjectNasaAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectNasaAPI", Version = "v1" });
             });
+            
 
         }
 
@@ -57,10 +60,6 @@ namespace ProjectNasaAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                // endpoints.MapControllerRoute(
-                //     name: "default",
-                //     pattern: "{controller=MyApi}/{action=Photos}/{id?}"
-                // );
             });
         }
     }

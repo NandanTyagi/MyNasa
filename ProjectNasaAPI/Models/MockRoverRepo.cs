@@ -12,9 +12,6 @@ namespace ProjectNasaAPI
             new Rover{Id = 3, Name = "Curiosity"},
             new Rover{Id = 4, Name = "MyRover"}
         };
-
-        // IEnumerable<Rover> IRoverRepo.AllRovers => throw new System.NotImplementedException();
-
         public Rover GetRover(string name)
         {
             return Rovers.FirstOrDefault(r => r.Name == name);

@@ -11,16 +11,13 @@ body {
   overflow-x: hidden;
   line-height: 1.3;
 }
-
-h1,
-h3 {
+h1,h3 {
   font-weight: 100;
 }
 hr {
   width: 100%;
   color: transparent;
 }
-
 .container-all {
   background-image: url('https://cdn.spacetelescope.org/archives/images/wallpaper1/opo0124a.jpg');
   background-size: cover;
@@ -106,9 +103,7 @@ container-main {
   height: 100%;
   width: 100%;
   background-color: black;
-
   opacity: 0.5;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -151,7 +146,6 @@ container-main {
   align-items: center;
   font-size: xx-smaller;
 }
-
 .box h3 {
   text-align: center;
 }
@@ -168,27 +162,27 @@ container-main {
   margin-bottom: 0;
 }
 .boxer {
-    width: 100vw;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-self: center;
-    align-self: center;
-    border: none;
-    height: 100%;
-    text-align: center;
-  }
-  .flexer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  #flexer {
-    display: flex;
-    flex-direction: column;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  align-self: center;
+  border: none;
+  height: 100%;
+  text-align: center;
+}
+.flexer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+#flexer {
+  display: flex;
+  flex-direction: column;
   }
 .boxer h3 {
   text-align: center;
@@ -205,13 +199,11 @@ container-main {
 .boxer:last-of-type {
   margin-bottom: 0;
 }
-
 .pic {
   width: 100%;
   height: 100%;
   margin-bottom: 0.5em;
 }
-
 .container-footer {
   position: fixed;
   bottom: 0;
@@ -246,8 +238,6 @@ container-main {
 }
 .slide-menu {
   position: fixed;
-  /* background-color: black; */
-
   top: 80px;
   right: 0px;
   width: 50%;
@@ -257,7 +247,6 @@ container-main {
   visibility: hidden;
   z-index: 1;
 }
-
 .slide-menu ul {
   z-index: 6;
 }
@@ -267,7 +256,6 @@ container-main {
   z-index: 6;
   font-weight: bold;
 }
-
 .slide-menu a {
   text-decoration: none;
   color: rgb(229, 226, 226);
@@ -280,11 +268,9 @@ container-main {
   height: 100%;
   width: 100%;
 }
-
 #rover-image {
   padding: 0;
 }
-
 .spinner {
   height: 89px;
 }
@@ -294,7 +280,6 @@ container-main {
   right: 50%;
   height: 80px;
   transform: translateX(50%);
-  
 }
 /* Form */
 form {
@@ -342,7 +327,6 @@ input {
 .menu-item {
   cursor: pointer;
 }
-
 .back-btn {
   position: absolute;
   top: 20px;
@@ -374,7 +358,6 @@ input {
   text-align: center;
   font-size: large;
 }
-
 .text-center > a {
   color: white;
   cursor: pointer;
@@ -387,6 +370,12 @@ a:hover {
   transform: scale(1.05);
   transition: transform 0.2s ease;
 }
+
+
+
+
+
+
 @media screen and (min-width: 750px) {
   body {
     overflow: hidden;
@@ -394,7 +383,7 @@ a:hover {
   .menu-item:hover {
   transform: scale(1.1);
   transition: transform 0.1s ease;
-}
+  }
   .box {
     width: 100%;
     margin: 0;
@@ -512,7 +501,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   font-size: xx-large;
-}
+  }
   .rover-shade-text {
     position: absolute;
     top: 0;
@@ -531,9 +520,7 @@ a:hover {
     left: 0;
     height: 100%;
     width: 100%;
-
     opacity: 1;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -543,6 +530,8 @@ a:hover {
     height: 70vh;
     width: initial;
     margin: 10px auto 2px auto;
+    border: 3px solid black;
+    box-shadow: 2px 2px 2px 2px black;
   }
   .container-footer-clearfix {
     background-color: transparent;
@@ -551,9 +540,12 @@ a:hover {
   .zoom:hover {
     transform: scale(1.1);
     transition: transform 0.2s ease-in-out;
-  }
-  
+  } 
 }
+
+
+
+
   @media screen and (max-height: 750px) {
   .grid-container-3 {
     display: grid;
@@ -573,7 +565,6 @@ a:hover {
     width: 100%;
     justify-self: center;
     height: 130px;
-    
   }
   .box {
     width: 100%;
@@ -584,8 +575,7 @@ a:hover {
     justify-self: center;
     align-self: center;
     border: none;
-    height: 100%;
-    
+    height: 100%;  
   }
    .grid-5-item {
     width: fit-content;
@@ -612,50 +602,54 @@ a:hover {
   }
 }
 
- @media screen and (max-height: 385px) {
-   body {
-     height: fit-content;
-     font-size: x-small;
-   }
-   .container-all {
-     height: fit-content;
-   }
-   .overlay {
-     height: fit-content;
-   }
-   .overlay-reverse {
-     height: fit-content;
-   }
-   .grid-container-3 {
-     margin: auto;
-     padding-top: 30px;
-   }
-   .grid-container-5 {
-     height: fit-content;
-   }
-   .container-main {
-     min-height: auto;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-   }
-   .grid-item {
-     height: 24vh;
-     width: 40vw;
-   }
-   #earth-date {
-     height: 20px;
-     width: 130px;
-   }
-   .submit-btn {
-     height: 25px;
-     width: 80px;
-   }
-   .slide-menu {
-     font-size: medium;
-   }
-   .container-header {
-     font-size: medium;
-   }
- }
+
+
+
+
+@media screen and (max-height: 385px) {
+  body {
+    height: fit-content;
+    font-size: x-small;
+  }
+  .container-all {
+    height: fit-content;
+  }
+  .overlay {
+    height: fit-content;
+  }
+  .overlay-reverse {
+    height: fit-content;
+  }
+  .grid-container-3 {
+    margin: auto;
+    padding-top: 30px;
+  }
+  .grid-container-5 {
+    height: fit-content;
+  }
+  .container-main {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .grid-item {
+    height: 24vh;
+    width: 40vw;
+  }
+  #earth-date {
+    height: 20px;
+    width: 130px;
+  }
+  .submit-btn {
+    height: 25px;
+    width: 80px;
+  }
+  .slide-menu {
+    font-size: medium;
+  }
+  .container-header {
+    font-size: medium;
+  }
+}

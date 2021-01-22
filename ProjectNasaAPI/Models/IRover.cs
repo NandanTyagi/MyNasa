@@ -9,8 +9,4 @@ namespace ProjectNasaAPI
         int Id { get; }
         string Name { get; set; }
     }
-    public interface IAllReposRepo
-    {
-        IEnumerable<Object> AllRepos { get; set; }
-    }
 }
